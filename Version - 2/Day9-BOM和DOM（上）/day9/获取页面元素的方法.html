@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script>
+			
+			window.onload = function(){
+				//获取页面元素
+				var oInp = document.getElementsByTagName("input");
+				//alert(oInp.length);
+				oInp[2].onclick = function(){
+					oInp[4].value = oInp[0].value > oInp[1].value ? oInp[0].value : oInp[1].value;
+				}
+				oInp[3].onclick = function(){
+					oInp[0].value = oInp[1].value = oInp[4].value = "";
+				}
+			}
+		</script>
+	</head>
+	<body style="height:5000px">
+		请输入第一个整数：<input type ="text" >
+		请输入第二个整数：<input type = "text" >
+		<input type="button" name = "btn" value="计算">
+		<input type="button" name = "btn" value="清空">
+		结果为：<input type="text">
+	</body>
+</html>

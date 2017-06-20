@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+			}
+			body{
+				background: #CCCCCC;
+			}
+			#box{
+				width: 400px;
+				border: 1px solid green;
+				margin: 50px auto;
+				overflow: hidden;
+				height: 430px;
+			}
+			#top{
+				position: relative;
+				top: 0;
+				left: 0;
+				width: 400px;
+				height: 320px;
+			}
+			#top li{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#left{
+				position: absolute;	
+				width: 200px;
+				height: 320px;
+				left: 0;
+				top: 0;
+				/*background: yellow;*/
+				z-index: 10000;
+			}
+			#right{
+				position: absolute;
+				width: 200px;
+				height: 320px;
+				right: 0;
+				top: 0;
+				/*background: pink;*/
+				z-index: 10000;
+				
+			}
+			#btn_l{
+				position: absolute;
+				background: url(img/btn.gif) no-repeat;
+				width: 60px;
+				height: 60px;
+				left: 10px;
+				top: 130px;
+				z-index: 10001;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+			#btn_r{
+				position: absolute;
+				background: url(img/btn.gif) no-repeat 0 -60px;
+				width: 60px;
+				height: 60px;
+				right: 10px;
+				top: 130px;
+				z-index: 10001;
+				opacity: 0;
+				filter: alpha(opacity=0);
+			}
+			#bottom{
+				position: relative;
+				width: 400px;
+				height: 110px;
+			}
+			#small_Ul{
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 110px;
+			}
+			#small_Ul li{
+				float: left;
+			}
+			#small_Ul img{
+				width: 120px;
+				height: 90px;
+				padding: 6px;
+			}
+		</style>
+		<script type="text/javascript" src="sport.js" ></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				//获取元素
+				//左右遮罩
+				var left = document.getElementById("left");
+				var right = document.getElementById("right");
+				//左右按钮
+				var btn_l = document.getElementById("btn_l");
+				var btn_r = document.getElementById("btn_r");
+				//获取大图
+				var bigPic = document.getElementById("top").getElementsByTagName("li");
+				//获取小图
+				var smallPic = document.getElementById("bottom").getElementsByTagName("li");
+				//获取小图ul
+				var smallUl = document.getElementById("small_Ul");
+				//设置小图ul的长度
+				smallUl.style.width = smallPic.length * smallPic[0].offsetWidth + "px";
+				console.log(smallUl.offsetWidth);
+				
+				//设置变量
+				//记录层级
+				var zIndex = 1;
+				//记录当前图片下标
+				var nowPic = 0;
+				//初始化当前状态
+				now();
+				//显示左右按钮
+				left.onmouseover = btn_l.onmouseover = function(){
+					sport(btn_l,{"opacity":100});
+				}
+				left.onmouseout = btn_l.onmouseout = function(){
+					sport(btn_l,{"opacity":0});
+				}
+				right.onmouseover = btn_r.onmouseover = function(){
+					sport(btn_r,{"opacity":100});
+				}
+				right.onmouseout = btn_r.onmouseout = function(){
+					sport(btn_r,{"opacity":0});
+				}
+				//给左右按钮添加点击事件
+				btn_l.onclick = function(){
+					nowPic --;
+					if(nowPic < 0){
+						nowPic = smallPic.length - 1;
+					}
+					now();
+				}
+				btn_r.onclick = function(){
+					nowPic ++;
+					if(nowPic > smallPic.length - 1){
+						nowPic = 0;
+					}
+					now();
+				}
+				
+				//给小图添加事件
+				for(var i = 0;i < smallPic.length; i ++){
+					//记录当前小图下标
+					smallPic[i].index = i;
+					//给小图添加移入移出事件
+					smallPic[i].onmouseover = function(){
+						//alert("11");
+						sport(this,{"opacity":100});
+					}
+					smallPic[i].onmouseout = function(){
+						if(this.index != nowPic){ //排除当前缩略图（因为当前缩略图透明度为100）
+							sport(this,{"opacity":50});
+						}
+					}
+					
+					//给小图添加点击事件
+					smallPic[i].onclick = function(){
+						nowPic = this.index;
+						now();
+					}
+				}
+				
+				
+				//当前状态
+				function now(){
+					//大图变化 
+					bigPic[nowPic].style["z-index"] = ++ zIndex;
+					//小图变化
+					if(nowPic == 0){
+						sport(smallUl,{left:0});
+					}else if(nowPic == smallPic.length - 1){
+						sport(smallUl,{left:-(smallPic.length - 3) * smallPic[0].offsetWidth});
+					}else{
+						sport(smallUl,{left:-(nowPic - 1) * smallPic[0].offsetWidth});
+					}
+					//小图透明度
+					//先将所有的小图透明度设置为50
+					for(var i = 0;i < smallPic.length; i ++){
+						sport(smallPic[i],{"opacity":50});
+					}
+					//再将当前缩略图透明度设置为100
+					sport(smallPic[nowPic],{opacity:100});
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<ul id="top">
+				<div id="left"></div>
+				<div id="right"></div>
+				<a href="javascript:;" id="btn_l"></a>
+				<a href="javascript:;" id="btn_r"></a>
+				<li style="z-index: 1;"><img src="img/1.jpg"/></li>
+				<li><img src="img/2.jpg"/></li>
+				<li><img src="img/3.jpg"/></li>
+				<li><img src="img/4.jpg"/></li>
+				<li><img src="img/5.jpg"/></li>
+				<li><img src="img/6.jpg"/></li>
+			</ul>
+			<div id="bottom">
+				<ul id="small_Ul">
+					<li><img src="img/1.jpg"/></li>
+					<li><img src="img/2.jpg"/></li>
+					<li><img src="img/3.jpg"/></li>
+					<li><img src="img/4.jpg"/></li>
+					<li><img src="img/5.jpg"/></li>
+					<li><img src="img/6.jpg"/></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

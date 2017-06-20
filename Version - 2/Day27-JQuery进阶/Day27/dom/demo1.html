@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<p>文本</p>
+		<div>我是DIV</div>
+		<p>文本2</p>
+		<button>删除文本节点</button>
+		<button>清空文本节点</button>
+		
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>	
+		<script type="text/javascript">
+		
+		$("button:first").click(function(){
+			$("p").remove();
+			alert($("p").length);
+			
+		})
+		$("button:eq(1)").click(function(){
+			$("p").empty();
+			alert($("p").length);
+			
+		})
+		</script>	
+	</body>
+</html>

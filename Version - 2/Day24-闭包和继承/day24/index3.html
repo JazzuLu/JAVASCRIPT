@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	function fn(){
+		var a = 3;
+		return function fn1(){  //闭包函数:定义在另一个函数作用域中的函数，称为闭包函数
+			//闭包函数的作用：通过闭包函数访问其外部的局部变量
+			//闭包的本质：将外部局部变量的值长期驻留在内存中。缺点：会造成内存泄露
+			return a;
+		}
+	}
+	alert(fn);
+	alert(fn());
+	
+	//fn1();
+	alert(fn()());
+</script>
+<script type="text/javascript">
+	function callback(){
+		alert("我是回调函数");
+	}
+</script>
+<script type="text/javascript">
+	window.onload = function(){
+		
+	}
+	callback();
+</script>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	/*标准浏览器：事件监听
+	document.addEventListener('click',fn,false);
+	document.addEventListener('click',fn1,false);
+	document.addEventListener('click',fn2,false);
+	*/
+	/*ie:事件监听 
+	document.attachEvent("onclick",fn);
+	document.attachEvent("onclick",fn1);
+	document.attachEvent("onclick",fn2);
+	*/
+	//兼容
+	function addEventListener(obj,event,fn,boo){
+		//obj.addEventListener ? obj.addEventListener(event,fn,boo) : obj.attachEvent("on" + event, fn);
+		if(obj.addEventListener){
+			obj.addEventListener(event,fn,boo);
+		}else{
+			obj.attachEvent("on" + event,fn);
+		}
+	}
+	addEventListener(document,'click',fn,false);
+	addEventListener(document,'click',fn1,false);
+	addEventListener(document,'click',fn2,false);
+	
+	
+	//标准
+	//document.removeEventListener('click',fn1,false);
+	//ie
+	//document.detachEvent("onclick",fn1);
+	//移除事件监听器的兼容
+	function removeEventListener(obj,event,fn,boo){
+		obj.removeEventListener ? obj.removeEventListener(event,fn,boo) : obj.detachEvent("on" + event,fn);
+	}
+	removeEventListener(document,'click',fn1,false);
+	function fn(){
+		alert(1);
+	}
+
+	function fn1(){
+		alert(2);
+	}
+	function fn2(){
+		alert(3);
+	}
+</script>

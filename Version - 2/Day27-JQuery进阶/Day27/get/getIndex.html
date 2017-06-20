@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ <meta charset="UTF-8">
+<title>Document</title>
+ 
+ </head>
+ <body>
+  
+
+  <input type="button" value="get方式发送数据" id="getBut" />
+  <div id="con"></div>
+
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript">
+  /*
+		$("#getBut").click(function(){
+			$("#con").load('demo.html');
+		});
+*/
+
+/*  利用 $.get 处理静态方法
+	$("#getBut").click(function(){
+			$.get('demo.html',function(response,status,xhr){
+				//alert(response);
+				//$("#con").html(response);
+				$("#con").append(response);
+			});
+		});
+*/
+
+/*$.get  以？方式传参 注： 每个页面之间的编码一定要相同
+	$("#getBut").click(function(){
+			$.get('demo.php?user=张志林&pwd=zzl123',function(response,status,xhr){
+				//alert(response);
+				$("#con").html(response);
+				
+			});
+		});
+*/
+/*  $.get 以字符串的方式来传参
+	$("#getBut").click(function(){
+			$.get('demo.php','user=张志林&pwd=zzl123',function(response,status,xhr){
+				//alert(response);
+				$("#con").html(response);
+				
+			});
+		});
+*/
+
+/*以 对象键值对的方式来发送数据*/
+	$("#getBut").click(function(){
+			$.get('demo.php',{
+				user:'张志林',
+				pwd:'zzl123'
+			},function(response,status,xhr){
+				//alert(response);
+				$("#con").html(response);
+				
+			},'html');
+		});
+
+/* 当我们强制，把xml数据，强制转换成.html文件时，他会把整个 xml文件结构打印出来
+
+	$("#getBut").click(function(){
+			$.get('demo.xml',function(response,status,xhr){
+				alert(response);
+				
+			},'html');
+		});
+*/
+
+/* 获取过来的 xml 文件如何获取里面的值 
+	$("#getBut").click(function(){
+			$.get('demo.xml',function(response,status,xhr){
+				//alert(response);
+				var user=$(response).find("root").find("user").text();
+				var arr=user.split(":"); //分隔成数组 ['用户名','张志林']
+				alert(arr[0]);
+			});
+		});
+*/
+
+/*如何获取 JSON 数据，并处理,如果强制专换成 html 文件，会把数据原始结构打出来*/
+	$("#getBut").click(function(){
+			//$.get('demo.JSON',function(response,status,xhr){
+			$.getJSON('demo.JSON',function(response,status,xhr){
+				//alert(response);
+				for(var i=0;i<2;i++){
+					_user=response[i].user;
+					_pwd=response[i].pwd;
+				alert("用户名："+_user+"密码："+_pwd);
+				}
+			},'html');
+		});
+
+/*$.getScript 他是专门用来处理　ｊｓ文件的
+	$("#getBut").click(function(){
+			$.getScript('demo.js',function(response,status,xhr){
+					
+				//alert("sss");
+				});
+		});
+*/
+
+
+  </script>
+ </body>
+</html>

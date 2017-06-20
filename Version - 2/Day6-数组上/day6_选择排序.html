@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Array</title>
+	</head>
+	<body>
+	
+	
+	
+	<script>
+	/*
+		选择排序:(思想：取数组中第一个元素，与其后面所有的元素进行比较，如果符合条件，则交换两个元素的位置)
+		由小到大
+		8   6   16   3   2
+		2   8   16   6   3
+		    3   16   8   6
+			    6    16  8
+				     8   16
+	*/
+	var arr = [8,6,16,3,2];
+	for(var i = 0;i < arr.length - 1; i ++){			//4
+		for(var j = i + 1;j < arr.length; j ++){		//4		共运行了16次
+			if(arr[i] > arr[j]){						//O(n^2)
+				var t= arr[i];
+				arr[i] = arr[j];
+				arr[j] = t;
+			}
+		}
+	}
+	console.log(arr);
+	</script>
+	</body>
+</html>

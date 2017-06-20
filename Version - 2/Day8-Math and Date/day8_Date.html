@@ -1,0 +1,63 @@
+<!doctype>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<script>
+		var now = new Date();
+		console.log(now);
+		//获取年份
+		console.log("年:" + now.getYear());
+		console.log("年：" +now.getFullYear());
+		//获取月份
+		console.log("月：" +now.getMonth());
+		//获取日
+		console.log("日：" +now.getDate());
+		//获取星期
+		console.log("星期:" + now.getDay());
+		//获取时
+		console.log("小时：" + now.getHours());
+		//获取分钟
+		console.log("分钟：" + now.getMinutes());
+		//获取秒钟
+		console.log("秒钟：" + now.getSeconds());
+		//获取毫秒
+		console.log("毫秒：" + now.getMilliseconds());
+		//获取时间戳
+		console.log("时间戳：" + now.getTime());
+		
+		
+		var later = new Date(1984,2,5,18,30,59,888);
+		//alert(later);
+		console.log(later.toLocaleString());
+		console.log(later.toLocaleTimeString());
+		console.log(later.toLocaleDateString());
+		
+		
+		var future = new Date();
+		//设置年份
+		future.setFullYear(2017);
+		//设置月份
+		future.setMonth(4);
+		//设置日
+		future.setDate(1);
+		//设置时
+		future.setHours(12);
+		//设置分
+		future.setMinutes(15);
+		//设置秒
+		future.setSeconds(15);
+		//设置毫秒
+		future.setMilliseconds(555);
+		console.log(future);
+		
+		var cha = Math.ceil((now - later)/1000); //秒
+		var day = Math.floor(cha / 60 / 60 / 24);
+		var hours = Math.floor((cha - day * 24 * 60 * 60) / 60 / 60);
+		var minutes = Math.floor((cha - day * 24 * 60 * 60 - hours * 60 * 60) / 60);
+		var seconds = cha % 60;
+		alert(day + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒钟");
+	</script>
+</head>
+<body>
+</body>
+</html>

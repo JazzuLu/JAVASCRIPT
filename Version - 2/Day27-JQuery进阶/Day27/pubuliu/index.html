@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.box{
+				position: relative;
+				float: left;
+			}
+			.content{
+				padding: 10px;
+				border: 1px solid #ccc;
+				box-shadow: 0 0 5px #ccc;
+				border-radius: 5px;
+			}
+			.content img{
+				width: 190px;
+				height: auto;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.11.3.js" ></script>
+		<script type="text/javascript">
+			$(document).ready(function(){ //加载文档
+				$(window).on("load",function(){//监听window的加载事件
+					imgLocation();
+					//模拟从服务器上获取到的json数据
+					var dataImg = {"data":[{src:"1.jpg"},{src:"2.jpg"},{src:"3.jpg"},{src:"4.jpg"},{src:"5.jpg"}]};
+					window.onscroll = function(){
+						if(scrollside()){
+							$.each(dataImg.data,function(index,value){
+								var box = $("<div>").addClass("box").appendTo($("#container"));
+								var content = $("<div>").addClass("content").appendTo(box);
+								//console.log("./img/"+$(value).attr("src"));
+								$("<img>").attr("src","./img/"+$(value).attr("src")).appendTo(content);
+							})
+							imgLocation();
+						}
+					}
+				})
+			})
+			function scrollside(){
+				var box = $(".box");
+				var lastboxHeight = box.last().get(0).offsetTop + Math.floor(box.last().height()/2);
+				var documentHeight = $(document).width();//当前容器的高度
+				//当前滚动的高度
+				var scrollHeight = $(window).scrollTop();
+				return (lastboxHeight < scrollHeight + documentHeight)? true : false;
+			}
+			function imgLocation(){
+				var box = $(".box"); //获取盒子对象
+				var boxWidth = box.eq(0).width(); //获取第一张图片的宽度
+				//获取当前设备的宽度/盒子的宽度（一排中可以放置的个数
+				var num = Math.floor($(window).width()/boxWidth);
+				var boxArr = []; //放置盒子的高度
+				//求最小高度，确定图片放置的位置
+				box.each(function(index,value){ //遍历
+					//console.log(index+"--"+value); //下标+元素
+					//获取每一个盒子的高度
+					var boxHeight = box.eq(index).height();
+					if(index < num){
+						boxArr[index] = boxHeight; //盒子的高度放入数组中
+						//console.log(boxHeight);
+					}else{
+						//求出最小高度的盒子
+						var minboxHeight = Math.min.apply(null,boxArr);
+						//console.log(minboxHeight);
+						var minboxIndex = $.inArray(minboxHeight,boxArr); //获取最小高度的位置
+						//console.log(minboxIndex);
+						//console.log(value);
+						//排放位置
+						$(value).css({"position":"absolute","top":minboxHeight,"left":box.eq(minboxIndex).position().left});
+						//重新计算当前列的高度
+						boxArr[minboxIndex] += box.eq(index).height();
+					}
+				})
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="box">
+				<div class="content">
+					<img src="img/1.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/2.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/3.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/4.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/5.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/6.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/7.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/8.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/9.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/10.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/11.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/12.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/13.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/14.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/15.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/16.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/17.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/18.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/19.jpg" />
+				</div>
+			</div>
+			<div class="box">
+				<div class="content">
+					<img src="img/20.jpg" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

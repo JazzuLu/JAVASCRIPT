@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+			}
+			#box1{
+				width: 100px;
+				height: 100px;
+				background: green;
+				position: absolute;
+				left: 300px;
+				
+			}
+		</style>
+		<script type="text/javascript" src="js/drag.js" ></script>
+		<script type="text/javascript">
+			
+			/*
+			 * 面向过程过渡到面向对象
+			 * 第一步：将公用的变量设置成全局变量
+			 * 第二步：将所有的函数，独立出来;
+			 * 第三步：将onload函数改成构造函数
+			 * 第四步：将所有公用的变量加上对象变成属性
+			 * 第五步：将所有函数加上对象变成原型方法
+			 * 第六步：将各个方法联系起来
+			 */
+			
+			function Drag(id){
+				//获取元素
+				this.oDiv = document.getElementById(id);
+				this.oDiv.onmousedown = 
+				this.disX = 0;
+				this.disY = 0;
+			}
+			Drag.prototype.fnMove = function (evt){
+				var e = evt || window.event;
+				this.oDiv.style.left = e.clientX - this.disX + "px";
+				this.oDiv.style.top = e.clientY - this.disY + "px";
+			}
+			Drag.prototype.fnUp = function (){
+				document.onmousemove = null;
+			}
+			Drag.prototype.fnDown = function (evt){
+				var e = evt || window.event;
+				this.disX = e.offsetX;
+				this.disY = e.offsetY;
+				document.onmousemove = 
+				document.onmouseup = 
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+		<div id="box1">
+			
+		</div>
+	</body>
+</html>

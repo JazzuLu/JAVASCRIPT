@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//创建对象
+	//构造函数的方式      new 构造函数（）
+	//json
+	
+	//实现了一个功能的封装
+	function bird(user,ag){
+		var name = user;
+		var age = ag;
+	}
+	
+	//定义对象
+	function Bird1(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	
+	
+	var obj = {
+		"name" : "zhangsan",
+		"age" : 18
+	}
+	
+	function Person(name,age){
+		//实例属性
+		this.name = name;
+		this.age = age;
+		//实例方法
+		this.eat = function(){
+			return "好吃";
+		}
+		this.drink = function(){
+			return "能喝";
+		}
+	}
+	//构造函数的缺点：每实例化一个对象，那么在构造函数中的实例将开辟一次空间，会造成空间或内存浪费
+	var ps1 = new Person("张三",18);
+	var ps2 = new Person("张三",90);
+	//alert(ps1.name == ps2.name);
+	//alert(ps1.eat == ps2.eat);
+	
+	//解决措施：原型prototype
+	function Dog(){}  //创建一个构造函数
+	//原型属性
+	Dog.prototype.name = "bigYellow";
+	Dog.prototype.age = 5;
+	//原型方法
+	Dog.prototype.bark = function(){
+		return "汪汪";
+	}
+	Dog.prototype.bite = function(){
+		return "咬肉";
+	}
+	//原型的缺点：原型无法传参，所以实例化出来的对象都具有相同的属性值。
+	var dog1 = new Dog();
+	var dog2 = new Dog();
+	//alert(dog1.name == dog2.name);
+	//alert(dog1.bark == dog2.bark);
+	
+	//混合型
+	//属性定义成实例属性
+	//方法定义成原型方法
+	
+	function Cat(name,age){
+		//实例属性
+		this.name = name;
+		this.age = age;
+		
+	}
+	//原型属性
+	//Cat.prototype.name = "小黑";
+	//原型方法
+	Cat.prototype = {
+		name : "小黑",
+		drag : function(){
+			return "抓老鼠";
+		},
+		eat : function(){
+			return "吃鱼";
+		}
+	}
+	//就近原则
+	var cat1 = new Cat("小黄",4);
+	cat1.name = "小花";
+	alert(cat1.name);
+	alert(cat1.eat());
+	
+	
+</script>

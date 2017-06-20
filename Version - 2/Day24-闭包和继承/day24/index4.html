@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//使用全局变量进行累加和
+	/*
+	var num = 3;
+	function fn(){
+		num ++;
+	}
+	alert(num);
+	fn();
+	alert(num);
+	fn();
+	alert(num);
+	*/
+	//使用局部变量进行累加和
+	/*
+	function fn(){
+		var num = 3;
+		return function(){
+			return ++num ;
+		}
+	}
+	*/
+	/*
+	alert(fn()());
+	alert(fn()());
+	alert(fn()());
+	
+	var a = fn();
+	alert(a());
+	alert(a());
+	alert(a());*/
+	//循环里的匿名函数的取值问题
+	/*
+	function fn(){
+		var arr = [];
+		for(var i = 0;i < 5;i ++){
+			arr[i] = (function(){
+				return i;
+			})();
+		}
+		return arr;
+	}
+	var list = fn();
+	for(var i = 0;i < list.length; i ++){
+		alert(list[i]);
+	}
+	*/
+	/*
+	function fn(){
+		var arr = [];
+		for(var i = 0;i < 5;i ++){
+			arr[i] = (function(i){
+				return i;
+			})(i);
+		}
+		return arr;
+	}
+	var list = fn();
+	for(var i = 0;i < list.length; i ++){
+		alert(list[i]);
+	}
+	*/
+	/*
+	function fn(){
+		var arr = [];
+		for(var i = 0;i < 5;i ++){
+			arr[i] = (function(i){
+				return function(){
+					return i;
+				};
+			})(i);
+		}
+		return arr;
+	}
+	var list = fn();
+	for(var i = 0;i < list.length; i ++){
+		alert(list[i]());
+	}
+	*/
+	/*
+	function fn(){
+		return function(){
+			return this; //闭包中的this代表window对象
+		}
+	}
+	alert(fn()());
+	*/
+	document.onclick = function(){
+		var that = this;
+		setTimeout(function(){
+			alert(this);
+		}.bind(this),3000);
+	}
+</script>

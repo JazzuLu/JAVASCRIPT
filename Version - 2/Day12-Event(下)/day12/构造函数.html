@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//创建对象
+	/*
+	var obj = new Object();
+	obj.name = "赵鹏程";
+	obj.age = "18";
+	obj.phone = "18888888888";
+	obj.address = "上海明珠塔";
+	
+	var obj1 = new Object();
+	obj.name = "沈长海";
+	obj.age = "17";
+	obj.phone = "16666666666";
+	obj.address = "杭州雷峰塔";
+	
+	*/
+	
+	/*//工厂模式(缺点：1.无法分清楚创建出来的对象属于哪一类的类型，2.)*/
+	
+	function createObj(name,age,pho,add){
+		//原料
+		var obj = new Object();
+		//加工
+		obj.name = name;
+		obj.age = age;
+		obj.phone = pho;
+		obj.address = add;
+		//出厂
+		return obj;
+	}
+	var obj = createObj("张三",16,110,"中南海");
+	//alert(obj.name);
+	var obj1 = createObj("小黑",3,null,'南天门');
+	var obj2 = createObj("mimi",2,null,'波斯');
+	
+	console.log("工厂模式：" + typeof obj);
+	console.log("工厂模式:" + typeof obj1);
+	//instanceof:判断某个对象是否属于某一个构造函数的实例，如果是返回true，否则返回false
+	console.log("工厂模式：" + (obj instanceof Object));
+	console.log("工厂模式:" + (obj1 instanceof Object));
+	//构造函数
+	//构造函数名，采用大驼峰
+	//构造函数必须采用new + 构造函数名（）来调用。
+	function CreateObj(name,age,pho,add){
+		//var obj = new Object(); 自动生成
+		this.name = name;
+		this.age = age;
+		this.phone = pho;
+		this.address = add;
+		//return obj;
+	}
+	var arr = new Array();
+	var str = new String();
+	var obj = new CreateObj("张三",18,110,"上海"); //构造函数
+	var aa = CreateObj(); //普通函数
+	//alert(obj.name);
+	var obj1 = new CreateObj("李四",19,120,"人民警院");
+	//alert(obj1.name);
+	
+	
+	
+	//创建一个人类的构造函数
+	function Person(name,age){
+		//属性
+		this.name = name;
+		this.age = age;
+		//方法
+		this.think = function(){
+			return "善于思考";
+		};
+	}
+	
+	//创建一个狗类的构造函数
+	function Dog(name,age){
+		//属性
+		this.name = name;
+		this.age = age;
+		//方法
+		this.eat = function(){
+			return "咬人";
+		}
+	}
+	
+	var ps = new Person("张三",18);
+	var dog = new Dog("smallBlack",3);
+	console.log("构造函数" + typeof ps);
+	console.log("构造函数" + typeof dog);
+	console.log("构造函数" + (ps instanceof Person));
+	console.log("构造函数" + (dog instanceof Person));
+	console.log("构造函数" + (ps instanceof Dog));
+	console.log("构造函数" + (dog instanceof Dog));
+	
+	
+	
+</script>

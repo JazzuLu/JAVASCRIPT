@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>放烟花效果</title>
+<style type="text/css">
+html,body{overflow:hidden;}
+body{background:#000;}
+.fire {
+	width: 3px;
+	height: 3px;
+	background: white;
+	position: absolute;
+} 
+.spark {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+}
+</style>
+<script src="js/sport.js"></script>
+
+</head>
+<body>
+</body>
+</html>
+<script type="text/javascript">	
+/*
+ 	第一步：单击 出火花    （从底部 缓动到  鼠标点击的位置）  --- 一个火花
+ 	第二步： 火花消失，爆炸效果   ----  一个爆炸  
+ 	第三步： 烟花效果  （面向对象实现）
+ * */
+	//点击body  出现火花
+	document.onclick = function(evt){
+		var e = evt || window.event;
+		launch(  {"x":e.clientX,"y":e.clientY}  );//发射功能
+	}
+	function launch(target_coord){
+		var fire = document.createElement("div");
+		fire.className = "fire";
+		fire.style.left = target_coord.x +"px";
+		fire.style.top = document.documentElement.clientHeight - 50 +"px";
+		document.body.appendChild(fire);
+		startMove(fire,{"top":target_coord.y},function(){
+			//火花消失
+			document.body.removeChild(fire);
+			explode(target_coord);
+		})
+	}
+	//爆炸
+	function explode(target_coord){
+		//爆炸出现多个烟花
+		var count = Math.floor( Math.random()*51 + 30 );  //    30  -- 80
+		for (var i = 0 ; i < count ; i++) {
+			var spark = document.createElement("div");
+			var s = new  Spark(spark,target_coord);
+			s.init();
+			s.sparkMove();
+		}
+	}
+	//烟花构造函数   属性是烟花  和  烟花的位置
+	function Spark(ele,pos){
+		this.target = ele; //烟花
+		this.pos = pos;
+	}
+	//初始化烟花的样式
+	Spark.prototype.init = function(){
+		this.target.className = "spark";
+	
+		this.target.style.backgroundColor = "#" + Math.floor(Math.random()*0xFFFFFF).toString(16);
+		document.body.appendChild(this.target);
+		
+		this.target.style.left = this.pos.x +"px";
+		this.target.style.top = this.pos.y +"px";
+		this.speedX = Math.floor(Math.random()*15) * (Math.random()>0.5 ?  1  : -1);
+		this.speedY = Math.floor(Math.random()*15) * (Math.random()>0.5 ?  1  : -1);
+	}
+	//运动
+	Spark.prototype.sparkMove = function(){
+		var that = this;
+		this.timer = setInterval(function(){
+			that.target.style.left = that.target.offsetLeft + that.speedX + "px";
+			that.target.style.top = that.target.offsetTop + that.speedY++ + "px";
+			if (that.target.offsetTop > (document.documentElement.clientHeight)) {
+				clearInterval(that.timer);
+				
+				document.body.removeChild(that.target);
+			}
+		},30)
+	}
+</script>

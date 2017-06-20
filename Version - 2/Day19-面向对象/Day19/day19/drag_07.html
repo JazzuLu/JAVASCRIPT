@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;	
+				height: 100px;
+				background: red;
+				position: absolute;
+			}
+			#box1{
+				width: 100px;
+				height: 100px;
+				 background: green;
+				 position: absolute;
+				 left:300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box1"></div>
+	</body>
+</html>
+<script type="text/javascript" src="js/drag.js" ></script>
+<script type="text/javascript" src="js/subDrag.js" ></script>
+<script type="text/javascript">
+	new Drag("box");
+	new SubDrag("box1");
+</script>

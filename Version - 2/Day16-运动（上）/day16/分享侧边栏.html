@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 200px;
+				background: #999999;
+				position: absolute;
+				left: -100px;
+				top: 200px;
+			}
+			#span1{
+				width: 30px;
+				height: 90px;
+				background: #CCCCCC;
+				position: absolute;
+				left: 100px;
+				top: 55px;
+				color: yellow;
+				line-height: 30px;
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript">
+			//页面加载
+			window.onload = function(){
+				//获取元素
+				var oDiv = document.getElementById("box");
+				var oSpan = document.getElementById("span1");
+				var timer = null;
+				//添加移入事件
+				oDiv.onmouseover = function(){
+					//alert(1);
+					startMove1(0);
+				};
+				//添加移出事件
+				oDiv.onmouseout = function(){
+					startMove1(-100);
+				};
+				
+				//运动框架
+				function startMove(){
+					clearInterval(timer);
+					timer = setInterval(function(){
+						if(oDiv.offsetLeft == 0){
+							clearInterval(timer);
+						}else{
+							oDiv.style.left = oDiv.offsetLeft + 10 + "px";
+						}
+					},30);
+				}
+				function startMove1(target){
+					clearInterval(timer);
+					timer = setInterval(function(){
+						var speed = target > oDiv.offsetLeft ? 10 : -10;
+						if(oDiv.offsetLeft == target){
+							clearInterval(timer);
+						}else{
+							oDiv.style.left = oDiv.offsetLeft + speed + "px";
+						}
+					},30);
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<span id="span1">
+				分享到
+			</span>
+		</div>
+	</body>
+</html>

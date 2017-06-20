@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{
+				opacity: 1;
+				filter: alpha(opacity=100);
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/100.jpg" id="img1"/>
+	</body>
+	<script type="text/javascript" src="js/move4.js" ></script>
+	<script type="text/javascript">
+		//获取页面元素
+		var oImg = document.getElementById("img1");
+		oImg.onmouseenter = function(){
+			startMove(oImg,"opacity",30);
+		};
+		oImg.onmouseleave = function(){
+			startMove(oImg,"opacity",100);
+		};
+		
+		
+	</script>
+</html>

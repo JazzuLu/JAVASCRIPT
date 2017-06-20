@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	
+	</body>
+</html>
+<script>
+	/*
+		选择：
+		1. 三元  条件？表达式1 ： 表达式2
+		2. if  
+			1> if（条件）{ 语句组;}   单分支
+			2> if(条件) {语句组A;} else {语句组B;}  双分支 
+			3> if (条件1) { 语句组1;} else if（条件2）{语句组2; }…… else if(条件n) {语句组n;} else {语句组n + 1;}  多分支 
+		3.switch  多支持
+		
+		循环：
+		普通：
+		
+		表达式1;      循环初值（从哪里开始）
+		while(表达式2){   循环条件（到哪里结束）
+			语句组;		满足循环要执行的语句
+			表达式3;    促使循环结束的语句。
+		}
+		
+		
+		表达式1;
+		do{
+			语句组;
+			表达式3;
+		}while(表达式2);
+	
+		for(表达式1；表达式2；表达式3){
+			语句组;
+		}
+		
+		表达式1;
+		for(;表达式2;表达式3){
+			语句组；
+		}
+		
+		表达式1;
+		for(;表达式2;){
+			语句组;
+			表达式3;
+		}
+		
+		while(1){}
+		do{}while(1);
+		for(;1;){}
+	*/
+	/*
+	//去空格
+	var str = prompt("请输入一个字符串：");
+	var n = str.length; 
+	for(var i = 0; i < n; i ++){
+		str = str.replace(" ","");
+		alert("(" + str + ")")
+	}
+	alert("(" + str + ")")
+	*/
+	//统计大小写字母的数量 
+	/*
+	var str = prompt("请输入一个字符串：");
+	var upperCount = 0;
+	var lowerCount = 0;
+	for(var i = 0;i < str.length; i ++){
+		if(str.charAt(i) >= "a" && str.charAt(i) <= "z"){
+			lowerCount ++;
+		}
+		if(str.charAt(i) >= "A" && str.charAt(i) <= "Z"){
+			upperCount ++;
+		}
+	}
+	alert("大写字母有：" + upperCount + "个\n" + "小写字母有：" + lowerCount + "个");
+	*/
+	/*
+	var str = prompt("请输入成绩：（每个成绩之间以逗号分隔）");
+	var arr = str.split(",");
+	var sum = arr.reduce(function (up,down){
+		return Number(up) + Number(down);
+	});
+	alert(sum);
+	*/
+	//字符串加密
+	/*
+	var str = prompt("请输入一个字符串：");
+	var ss = "";
+	for(var i = 0;i < str.length; i ++){
+		
+		ss += String.fromCharCode(str.charCodeAt(i) + 521);
+	}
+	alert(ss);
+	*/
+	
+	//字符串逆序
+	/*
+	var str = prompt("请输入一个字符串：");
+	//方法一
+	var ss = "";
+	for(var i =str.length - 1; i >= 0; i --){
+		ss += str.charAt(i);
+	}
+	alert(ss);
+	//方法二
+	str = str.split("").reverse().join("");
+	alert(str);
+	*/
+	
+</script>

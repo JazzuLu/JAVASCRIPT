@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+	</body>
+</html>
+<script src="js/move6.js"></script>
+<script type="text/javascript">
+	var oDiv = document.getElementById("box");
+	oDiv.onmouseenter = function(){
+		startMove(oDiv,{"height":102,"width":500});
+	}
+	oDiv.onmouseleave = function(){
+		startMove(oDiv,{"height":100,"width":100});
+	}
+</script>

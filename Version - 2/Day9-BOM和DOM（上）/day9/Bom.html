@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+	<input type="button" onclick = "fn()" value="跳到百度" id="btn">
+	<input type="button" onclick = "fn1()" value="刷新" id="btn">
+	</body>
+</html>
+<script>
+	alert(navigator.userAgent);
+	function fn(){
+		//window.location = "http://www.baidu.com";
+		location.href = "http://www.qq.com";
+	}
+	function fn1(){
+		location.reload(true);
+	}
+</script>

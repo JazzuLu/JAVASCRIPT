@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	/*
+	var a = "alert('helle');";
+	eval(a);
+	*/
+	var a = '{"name":"张三","age":18}';
+	var obj = eval("(" + '{"name":"张三","age":18}' + ")");
+	alert(obj.name);
+	alert(obj.age);
+	var b = eval('function fn(){alert(2);}');
+	
+	fn();
+	//eval():将字符串强制转换成表达式。
+</script>

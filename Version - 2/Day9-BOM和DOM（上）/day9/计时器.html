@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script>
+		//添加页面加载事件，作用：当页面上的内容全部加载完毕的时候，再来执行当前函数。
+		window.onload = function(){
+			//1.先获取页面中的元素
+			var oTxt1 = document.getElementById("txt1"); //获取到指定id名称的元素
+			//alert(oTxt1);
+			var oTxt2 = document.getElementById("txt2");
+			var oBtn1 = document.getElementById("submit");
+			var oBtn2 = document.getElementById("reset");
+			var oTxt3 = document.getElementById("txt3");
+			
+			//2.给按钮添加事件（鼠标点击事件）
+			oBtn1.onclick = fnEvent;
+			function fnEvent(){
+				/*
+					setInterval(表达式,毫秒数);
+					
+					clearInterval()
+				*/
+				/*
+				setInterval(fn,5000)
+				function fn(){
+					alert("hello");
+				}
+				*/
+				var i = 1;
+				var id = setInterval(function(){
+					if(i <= 20){
+						document.title = i ++;
+					}else{
+						clearInterval(id);
+					}
+					
+				},1000);
+				//alert(id);
+			}
+			oBtn2.onclick = function(){
+				oTxt1.value = "";
+				oTxt2.value = "";
+				oTxt3.value = "";
+			}
+		}
+		</script>
+	</head>
+	<body>
+	<p>请输入第一个整数：<input type = "text" id="txt1"></p>
+	<p>请输入第二个整数：<input type = "text" id="txt2"></p>
+	<p><input type="button" id="submit" value="计算">
+	<input type="button" id="reset" value="清空"></p>
+	<p>总和为：<input type = "text" id="txt3"></p>
+	</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html ng-app="ngShowcaseApp" controller="ctrl.integrated.cart">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/cart.css" />
+		<script type="text/javascript" src="js/jquery-1.11.3.js" ></script>
+		<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/angular.min.js" ></script>
+		<!--<script src="http://code.angularjs.org/angular-1.0.1.min.js">-->
+<!--<script src="//cdn.bootcss.com/angular.js/1.6.2/angular.min.js"></script>-->
+		<!--<script type="text/javascript" src="js/index.js" ></script>-->
+		<script type="text/javascript">
+			'use strict';
+
+angular.module('ngShowcaseApp',[]).controller('ctrl.integrated.cart', function($scope) {
+	var vm = $scope.vm = {};
+	vm.items = [{
+			code: '10001',
+			label: '苹果手机',
+			description: '苹果5S，最新款，最精致的手机',
+			price: '5000',
+			thumbnail: 'sj.jpg'
+		},
+		{
+			code: '20001',
+			label: '美的电磁炉',
+			description: '美的出产的电磁炉，配合苹果手机使用效果更佳',
+			price: '1000',
+			thumbnail: 'dcl.jpg'
+		}
+	];
+	vm.cart = {
+		label: '张三的购物车',
+		lines: []
+	};
+	vm.addToCart = function addToCart(item) {
+		if(!item.code)
+			return;
+		var line = _.findWhere(vm.cart.lines, { code: item.code });
+		if(!line) {
+			line = _.extend({}, item, { quantity: 1 });
+			vm.cart.lines.push(line);
+		} else {
+			++line.quantity;
+		}
+	};
+	vm.cartCount = function() {
+		return _.reduce(vm.cart.lines, function(memo, line) { return memo + line.quantity }, 0);
+	};
+	vm.cartTotal = function() {
+		return _.reduce(vm.cart.lines, function(memo, line) { return memo + line.price * line.quantity }, 0);
+	};
+	vm.incrementQuantity = function(line) {
+		line.quantity++;
+	};
+	vm.decrementQuantity = function(line) {
+		if(line.quantity <= 0)
+			return;
+		--line.quantity
+	};
+	vm.removeFromCart = function(line) {
+		vm.cart.lines = _.reject(vm.cart.lines, function(item) { return line.code === item.code });
+	};
+	vm.buy = function buy(item) {
+		if(!item.code)
+			return;
+		vm.cart.lines = [_.extend({}, item, { quantity: 1 })];
+	};
+});</script>
+	</head>
+	<body>
+		<h4>商品列表 / 购物车</h4>
+<div class="row">
+  <div class="col-sm-6 col-md-6" ng-repeat="item in vm.items">
+    <div class="thumbnail">
+      <img ng-src="img/{{item.thumbnail}}" alt="{{item.label}}">
+
+      <div class="caption">
+        <h3>{{item.label}}
+          <small>{{item.code}}</small>
+        </h3>
+        <div class="items-details">{{item.description}}</div>
+        <p class="text-right">
+          <span class="btn btn-primary btn-sm" role="button" ng-click="vm.addToCart(item)" title="加入购物车"><i
+              class="glyphicon glyphicon-shopping-cart"></i></span>
+          <span class="btn btn-warning btn-sm" role="button" ng-click="vm.buy(item)" title="直接购买当前商品">立即购买</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h4>{{vm.cart.label}}(共{{vm.cartCount()}}件 总计 {{vm.cartTotal()}} 元)</h4>
+<div class="alert alert-info" ng-if="!vm.cart.lines.length">请先添加商品</div>
+<table class="table table-bordered table-hover" ng-if="vm.cart.lines.length > 0">
+  <thead>
+  <tr>
+    <th>产品编号</th>
+    <th>产品名称</th>
+    <th>购买数量</th>
+    <th>操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="line in vm.cart.lines" ng-class="{removed: line.quantity <= 0}">
+    <td>{{line.code}}</td>
+    <td>{{line.label}}</td>
+    <td>
+      <span class="btn btn-primary btn-sm" ng-click="vm.decrementQuantity(line)"><i
+          class="glyphicon glyphicon-minus"></i></span>
+      {{line.quantity}}
+      <span class="btn btn-primary btn-sm" ng-click="vm.incrementQuantity(line)"><i
+          class="glyphicon glyphicon-plus"></i></span>
+    </td>
+    <td><span class="btn btn-primary" ng-click="vm.removeFromCart(line)"><i
+        class="glyphicon glyphicon-remove"></i>移除</span></td>
+  </tr>
+  </tbody>
+</table>
+	</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#main{
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 320px;
+				height: 568px;
+				background: url(img/background_1.png) no-repeat center;
+				overflow:hidden;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<button id="mouse">创建战斗机</button>
+		<div id="main">
+			<p>总分:<i id="s">0</i></p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var mouse = document.getElementById("mouse");
+	var main = document.getElementById("main");
+	var flag = true; //定义一个开关变量，控制启动 敌机创建的 定时器
+	var sum = 0;
+	mouse.onclick = function(e){
+		e.stopPropagation();
+		//创建战斗机
+		var myPlane = document.createElement("img");
+		myPlane.src="img/myplane.gif";
+		myPlane.style.width = "66px";
+		myPlane.style.height = "80px";
+		main.appendChild(myPlane);
+		
+		
+		//移动鼠标    飞机跟随移动
+		document.onmousemove = function(evt){
+			var e = evt || window.event;
+			var x = e.clientX - main.offsetLeft - parseInt(myPlane.offsetWidth/2);
+			var y = e.clientY - main.offsetTop - parseInt(myPlane.offsetHeight/2);
+			myPlane.style.position = "absolute";
+			//边界处理
+			if(x<0){
+				x = 0;
+			}else if(x > (main.offsetWidth-myPlane.offsetWidth)){
+				x = main.offsetWidth-myPlane.offsetWidth;
+			}
+			if(y<0){
+				y=0;
+			}else if(y> (main.offsetHeight - myPlane.offsetHeight)){
+				y = main.offsetHeight - myPlane.offsetHeight;
+			}
+			myPlane.style.left = x+"px";
+			myPlane.style.top = y+"px";
+		}
+		
+		//鼠标按下  创建子弹
+		document.onclick = function(){
+			//创建子弹
+			var myBullet = document.createElement("img");
+			myBullet.src = "img/bullet1.png";
+			myBullet.style.width = "6px";
+			myBullet.style.height = "14px";
+			myBullet.style.position = "absolute";
+			myBullet.style.top = myPlane.offsetTop + "px";
+			myBullet.style.left = myPlane.offsetLeft + myPlane.offsetWidth/2 +"px";
+			main.appendChild(myBullet);
+			
+			//让子弹飞
+			var bulletTimer = setInterval(function(){
+				var bTop = myBullet.offsetTop;
+				myBullet.style.top = bTop -5 +"px";
+				//当子弹飞出可视区  清除定时器 并删除子弹
+				if(bTop<=0){
+					clearInterval(bulletTimer);
+					main.removeChild(myBullet);
+				}
+				
+				//在子弹飞的定时器中  遍历所有的敌机，用当前的子弹 和 敌机 检测碰撞
+				var enemyList = document.getElementsByClassName("enemy");
+				//获取子弹的碰撞数据
+				var bw = myBullet.offsetWidth;
+				var bl = myBullet.offsetLeft;
+				var bt = myBullet.offsetTop;
+				
+				for (var i=0;i<enemyList.length;i++) {
+					var ew = enemyList[i].offsetWidth;
+					var eh = enemyList[i].offsetHeight;
+					var el = enemyList[i].offsetLeft;
+					var et = enemyList[i].offsetTop;
+					
+					if(  bl<(el+ew) && (bl+bw)>el && bt<(et + eh) ){						
+						//如果飞机的血值 用尽，，飞机 和子弹 全部销毁
+						if(enemyList[i].blood == 1){
+							/*
+							 碰撞成功后：
+							 1、 创建一个新图片，这个图片就是   之前图片对应的  爆炸图片
+							    图片的位置  和 原始图片的位置一致 
+							 2、加分  
+							 * */
+							//console.log(99);
+							//碰撞成功后   敌机操作 --换图     图消失
+							//enemyList[i].src= "../img/"+arrEnemy[enemyList[i].index];
+							var enemyNew = document.createElement("img");
+							enemyNew.src="img/"+arrEnemy[enemyList[i].index];
+							main.appendChild(enemyNew);
+							enemyNew.style.position = "absolute";
+							enemyNew.style.top = enemyList[i].offsetTop+"px";
+							enemyNew.style.left = enemyList[i].offsetLeft+"px";							
+							//加分
+							sum = sum + arrScore[enemyList[i].index];
+							document.getElementById("s").innerHTML = sum;							
+							//删除原始图片
+							main.removeChild(enemyList[i]);							
+							//延时删除   爆炸的敌机  新 创建出来的图片
+							setTimeout(function(){							
+								main.removeChild(enemyNew);
+							},300)								
+							//子弹操作 ---清除定时器  删除子弹	
+							clearInterval(bulletTimer);
+							main.removeChild(myBullet);
+							
+						}else{
+							//子弹销毁
+							//子弹操作 ---清除定时器  删除子弹	
+							clearInterval(bulletTimer);
+							main.removeChild(myBullet);
+							// 血值--
+							enemyList[i].blood--;
+						}
+										
+					}
+				}
+				
+			},30);
+			
+			//定义敌机数据的数组   
+			var arrSrc = ["enemy1_fly_1.png","enemy2_fly_1.png","enemy3_fly_1.png"];
+			var arrW = [34,46,110];
+			var arrH = [-24,-60,-164];
+			var arrEnemy = ["smEnemyBoom.gif","mdEnemyBoom.gif","bigEnemyBoom.gif"];
+			var arrBlood = [2,4,6];
+			var arrScore = [1,2,3];
+			if(flag){				
+				//创建敌机   随机出现敌机 启动一个敌机定时器
+				var enemyTimer = setInterval(function(){	
+					//获取随机下标 0--2
+					var index = Math.floor(Math.random()*3);
+					var enemyPlane = document.createElement("img");
+					enemyPlane.src = "img/"+arrSrc[index];
+					//给所有的敌机一个class  便于根据类名找到所有敌机
+					enemyPlane.className = "enemy";
+					
+					//给每一个敌机添加一个 随机下标  ,目的是找到碰撞的 敌机
+					enemyPlane.index = index;
+					
+					//给每一个敌机一个 血值属性   目的判断飞机 经过几次和子弹的碰撞后 消失
+					enemyPlane.blood = arrBlood[index];
+					
+					enemyPlane.style.position = "absolute";
+					enemyPlane.style.top = arrH[index]+"px";
+					enemyPlane.style.left = Math.floor(Math.random()*(main.offsetWidth - arrW[index])) +"px";
+					main.appendChild(enemyPlane);
+					
+					//启动敌机移动的定时器    让敌机飞
+					var enemyMoveTimer = setInterval(function(){
+						var eTop = enemyPlane.offsetTop;
+						enemyPlane.style.top = eTop + 3 +"px";
+						if(eTop>568){
+							clearInterval(enemyMoveTierm);
+							main.removeChild(enemyPlane);
+						}
+						
+						
+						//在敌机移动的定时器中 检测  战斗机和敌机的碰撞
+						var mh = myPlane.offsetHeight;
+						var mw = myPlane.offsetWidth;
+						var ml = myPlane.offsetLeft;
+						var mt = myPlane.offsetTop;
+						var ew = enemyPlane.offsetWidth;
+						var eh = enemyPlane.offsetHeight;
+						var el = enemyPlane.offsetLeft;
+						var et = enemyPlane.offsetTop;
+						if(ml<(ew+el) && mt<(eh+et) &&  (ml+mw)>el &&  (mt+mh) > et){
+							//敌机和战斗机 换图  并消失
+							myPlane.src = "img/myplaneBoom.gif";
+							enemyPlane.src = "img/"+arrEnemy[enemyPlane.index];
+							
+							//延时消失：
+							setTimeout(function(){
+								main.removeChild(myPlane);
+								main.removeChild(enemyPlane);
+							},300)
+							clearInterval(enemyMoveTimer);
+						}
+						
+					},30)
+					enemyPlane.tname = enemyMoveTimer;
+					
+				},1000);
+				flag = false;//改变开关变量的值  取消 单击时  敌机定时器的 启动
+			}
+		}
+	}
+</script>
+

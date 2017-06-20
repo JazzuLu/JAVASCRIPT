@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+          padding: 50px;
+        }
+        .outer{
+            width: 400px;
+            position: relative;
+        }
+        .outer > li{
+            width: 400px;
+            height: 60px;
+            list-style: none;
+            line-height: 60px;
+            background: #5da;
+            margin: 10px 
+        }
+        .inner{
+            width: 300px;
+            height: 240px;
+            background: yellowgreen;
+            display: none;
+            position: absolute;
+            left: 400px;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+     <ul class="outer">
+         <li>111111111111111<div class="inner">111111111</div></li>
+         <li>222222222222222<div class="inner">222222222</div></li>
+         <li>333333333333333<div class="inner">333333333</div></li>
+         <li>444444444444444<div class="inner">444444444</div></li>
+     </ul>
+</body>
+<script>
+        var outer = document.getElementsByClassName('outer')[0];
+        var outlis = outer.getElementsByTagName('li');
+        var inlis = document.getElementsByClassName('inner');
+        for(var i=0;i<outlis.length;i++)
+        {
+            outlis[i].index=i;
+            outlis[i].onmouseenter=function () {
+                 for(var i=0;i<outlis.length;i++)
+                 {
+                      inlis[i].style.display='none';
+                 }
+                 inlis[this.index].style.display='block';
+            }
+            outlis[i].onmouseleave=function () {
+                 for(var i=0;i<outlis.length;i++)
+                 {
+                     inlis[i].style.display='none';
+                 }
+            }
+        }
+</script>
+</html>

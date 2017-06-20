@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#main{
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 320px;
+				height: 568px;
+				background: url(img/background_1.png) no-repeat center;
+				overflow:hidden;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<button id="mouse">创建战斗机</button>
+		<div id="main">
+			<p>总分:<i id="s">0</i></p>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var mouse = document.getElementById("mouse");
+	var main = document.getElementById("main");
+	mouse.onclick = function(e){
+		e.stopPropagation();
+		var myPlane = document.createElement("img");
+		myPlane.src="img/myplane.gif";
+		myPlane.style.width="66px";
+		myPlane.style.height="80px";
+		main.appendChild(myPlane);
+		
+		//鼠标移动  飞机跟随效果
+		document.onmousemove = function(evt){
+			var e = evt || window.event;
+			myPlane.style.position = "absolute";
+			var x = e.clientX -  main.offsetLeft - myPlane.offsetWidth/2;
+			var y = e.clientY - main.offsetTop - myPlane.offsetHeight/2;
+			
+			if (x<0) {
+				x = 0;
+			}else if(x> main.offsetWidth - myPlane.offsetWidth){
+				x = main.offsetWidth - myPlane.offsetWidth;
+			}
+			if (y<0) {
+				y = 0;
+			}else if(y> main.offsetHeight - myPlane.offsetHeight){
+				y = main.offsetHeight - myPlane.offsetHeight;
+			}
+			myPlane.style.left = x+"px";
+			myPlane.style.top = y+"px";	
+		}
+		var flag = true;//值为true  创建敌机定时器开启  
+		//点击文档  创建子弹
+		document.onclick = function(evt){
+			var e = evt || window.event;
+			var bullet = document.createElement("img");
+			bullet.src = "img/bullet1.png";
+			bullet.style.width = "6px";
+			bullet.style.height = "14px";
+			bullet.style.position = "absolute";
+			bullet.style.left = myPlane.offsetLeft + myPlane.offsetWidth/2 + "px";
+			bullet.style.top = myPlane.offsetTop + "px";
+			main.appendChild(bullet);
+			
+			//让子弹飞
+			var bulletTimer = setInterval(function(){
+				var bTop = bullet.offsetTop;
+				bullet.style.top = bTop - 2 + "px";
+				if (bTop < 0) {
+					main.removeChild(bullet);
+					clearInterval(bulletTimer);
+				}	
+				var arrSrc = ["enemy1_fly_1.png","enemy2_fly_1.png","enemy3_fly_1.png"];//敌机图片路径
+				var arrW = [34,46,110];//敌机宽度
+				var arrH = [24,60,164];//敌机高度
+				if (flag) {
+					//随机创建敌机
+					var enemyTimer = setInterval(function(){
+						var index = Math.floor(Math.random()*3);
+						var enemyPlane = document.createElement("img");
+						enemyPlane.src = "img/"+arrSrc[index];
+						enemyPlane.style.position = "absolute";
+						enemyPlane.style.left =Math.floor(Math.random()*(main.offsetWidth - arrW[index] + 1)) + "px";
+						enemyPlane.style.top = 0;
+						main.appendChild(enemyPlane);
+						//让敌机移动
+						var enemyMoveTimer = setInterval(function(){
+							var eTop = enemyPlane.offsetTop;
+							enemyPlane.style.top = enemyPlane.offsetTop + 2 + "px";
+							if (eTop > main.offsetHeight) {
+								main.removeChild(enemyPlane);
+								clearInterval(enemyMoveTimer);
+							}
+						},30)
+					},1000)
+					flag = false;
+				}
+			},10)
+			
+		}
+	}
+</script>
+

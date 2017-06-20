@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+			}
+			#box1{
+				width: 100px;
+				height: 100px;
+				background: green;
+				position: absolute;
+				left:300px;
+				top: 100px;
+			}
+			img{
+				display: block;
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				left: 200px;
+				top: 300px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			
+		</div>
+		<div id="box1">
+			
+		</div>
+		<img src="img/15.jpg"/>
+	</body>
+</html>
+<script type="text/javascript" src="js/drag.js" ></script>
+<script type="text/javascript">
+	//获取页面元素
+	var oDiv = document.getElementById("box");
+	var oDiv2 = document.getElementById("box1");
+	var oImg = document.getElementsByTagName("img")[0];
+	drag(oDiv);
+	drag(oDiv2);
+	drag(oImg);
+	/*
+	oDiv.onmousedown = function(evt){
+		var e = evt || window.event;
+		//获取鼠标当前的相对坐标值
+		var disX = e.offsetX;
+		var disY = e.offsetY;
+		document.onmousemove = function(evt){
+			var e = evt || window.event;
+			oDiv.style.left = e.clientX - disX + "px";
+			oDiv.style.top = e.clientY - disY + "px";
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+		}
+	}
+	*/
+	
+	//思考：设置拖拽边界（使用键盘上的四个按键控制div的上下左右移动）
+</script>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script>
+			//添加页面加载事件
+			window.onload = function(){
+				//获取页面元素
+				var oBtnStart = document.getElementById("btn");
+				var oBtnStop = document.getElementById("btn1");
+				//设置颜色数组
+				var arrColor = ["#ffff00","#ccffff","#ffcc00","#ccccff","#660000","#6699ff","#996633"];
+				var index = 0;
+				var timer = null;
+				//给按钮添加点击事件
+				oBtnStart.onclick = function(){
+					clearInterval(timer);
+					timer = setInterval(function(){
+						document.body.style.backgroundColor = arrColor[index];
+						index ++;
+						index = index % arrColor.length;
+					},3000);
+					
+				};
+				oBtnStop.onclick = function(){
+					clearInterval(timer);
+				};
+			};
+				
+			//思考：背景图片的切换
+		</script>
+	</head>
+	<body>
+		<input type ="button" id="btn" value="开始切换">
+		<input type ="button" id="btn1" value="停">
+	</body>
+</html>

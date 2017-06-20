@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Array</title>
+	</head>
+	<body>
+	
+	
+	
+	<script>
+	/*
+		冒泡排序:正向冒泡(思想：相邻的两个数比较，符合条件的交换两个数的位置)
+		由小到大
+		8   6   16   3   2
+		6   8    3   2   16   第一轮  比较4（长度-1）次
+		6   3    2   8        第二轮  比较3次
+		3   2    6   		  第三轮  比较2次
+		2   3				  第四轮  比较1次
+		
+		var arr = [8,6,16,3,2];
+		for(var i = 1; i < arr.length ; i ++){  //控制比较次数
+			for(var j = 0; j < arr.length - i; j ++){ //遍历数组
+				if(arr[j] > arr[j + 1]){  //符合条件的交换两个数的位置
+					var t = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = t;
+				}
+			}
+		}
+		alert(arr);
+	*/
+	/*
+		反向冒泡：由小到大
+		8   6   16   3   2
+		2	8	6	 16	 3
+			3	8	 6	 16
+				6	 8	 16
+				     8   16
+	*/
+	
+	var arr = [8,6,16,3,2];
+for(var i = 1;i < arr.length; i ++){
+	for(var j = arr.length - 1; j >= i ; j --){
+		if(arr[j] > arr[j - 1]){
+			var t = arr[j];
+			arr[j] = arr[j - 1];
+			arr[j - 1] = t;
+		}
+	}
+}
+alert(arr);
+	</script>
+	</body>
+</html>

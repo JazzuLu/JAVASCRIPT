@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>		
+		<p>p1</p>
+		<p>p2</p>
+		<p>p3</p>		
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>	
+		<script type="text/javascript">
+			$("p").click(function(){				
+//				$("p").replaceWith("<button>"+$(this).text()+"</button>");				
+				$("<button>"+$(this).text()+"</button>").replaceAll($("p"));				
+			});		
+		</script>			
+	</body>
+</html>

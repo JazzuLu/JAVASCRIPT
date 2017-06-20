@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;  /*运动：必须让元素脱离文档流*/
+				left: 990px;
+			}
+			#span1{
+				width: 1px;
+				height: 300px;
+				background: black;
+				position: absolute;
+				top: 0;
+				left: 500px;
+			}
+		</style>
+		<script type="text/javascript" src="js/move3.js" ></script>
+		<script type="text/javascript">
+			//页面加载
+			window.onload = function(){
+				//获取页面元素
+				var oDiv = document.getElementById("box");
+				var oBtn = document.getElementById("btn");
+				var timer = null;
+				oBtn.onclick = function(){
+					startMove(oDiv,"left",500)
+				};
+				
+				
+			};
+		</script>
+	</head>
+	<body>
+		<input type="button" name="btn" id="btn" value="开始运动" />
+		<div id="box">
+			
+		</div>
+		<span id="span1">
+			
+		</span>
+	</body>
+</html>

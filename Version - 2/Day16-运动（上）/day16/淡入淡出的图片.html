@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			img{
+				opacity: 1;
+				filter: alpha(opacity=100);
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/100.jpg" id="img1"/>
+	</body>
+	<script type="text/javascript">
+		//获取页面元素
+		var oImg = document.getElementById("img1");
+		oImg.onmouseenter = function(){
+			startMove(oImg,30);
+		};
+		oImg.onmouseleave = function(){
+			startMove(oImg,100);
+		};
+		var timer = null;
+		var alpha = 100;
+		function startMove(obj,target){
+			clearInterval(timer);
+			timer = setInterval(function(){
+				//计算速度
+				//var speed = (target - alpha) / 8;
+				//speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+				var speed = (target - alpha) > 0 ? 1 : -1;
+				//检测停止
+				if(alpha == target){
+					clearInterval(timer);
+				}else{
+					alpha += speed;
+					obj.style.opacity = alpha / 100;
+					obj.style.filter = "alpha(opacity=" + alpha + ")";
+					document.title = alpha;
+				}
+			},30);
+		}
+	</script>
+</html>

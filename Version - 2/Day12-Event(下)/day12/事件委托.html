@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload = function(){
+				/*
+				//获取页面中所有的li
+				var oLis = document.getElementsByTagName("li");
+				//给所有的li添加移入移出事件
+				for(var i = 0;i < oLis.length; i ++){
+					//添加移入事件
+					oLis[i].onmouseover = function(){
+						this.style.backgroundColor = "red"; //设置当前li的背景为红色
+					};
+					//添加移出事件
+					oLis[i].onmouseout = function(){
+						this.style.backgroundColor = ""; //取消当前li的背景颜色
+					};
+				}
+				
+				*/
+				
+				//事件委托的方法
+				var oUl = document.getElementById("ul1");
+				oUl.onmouseover = function(evt){
+					//事件对象的兼容
+					var e = evt || window.event;
+					//事件源的兼容
+					var src = e.target || e.srcElement;
+					if(src.nodeName.toLowerCase() == "li"){
+						src.style.backgroundColor = "red";
+					}
+				}
+				oUl.onmouseout = function(evt){
+					var e = evt || window.event;
+					var src = e.target || e.srcElement;
+					if(src.nodeName.toLowerCase() == "li"){
+						src.style.backgroundColor = "";
+					}
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</body>
+</html>

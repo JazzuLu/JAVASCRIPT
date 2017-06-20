@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 171px;
+				height: 256px;
+				position: relative;
+				border: 1px solid black;
+				padding: 7px;
+			}
+			#box .small_pic{
+				width: 171px;
+				height: 256px;
+				position: relative;
+				top: 0;
+				left: 0;
+				/*border: 1px solid black;*/
+			}
+			#box .mark{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 2;
+			}
+			#box .float_layer{
+				width: 50px;
+				height: 50px;
+				position: absolute;
+				border: 1px solid black;
+				background: white;
+				filter: alpha(opacity=30);
+				opacity: 0.3;
+				display: none;
+			}
+			#box .big_pic{
+				position: absolute;
+				top: 1px;
+				left: 300px;
+				border: 2px solid #CCCCCC;
+				overflow: hidden;
+				width: 171px;
+				height: 256px;
+				display: none;
+			}
+			#box .big_pic img{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				//获取元素
+				var oDiv = document.getElementById("box");
+				var oSmallPic = document.getElementsByClassName("small_pic")[0];
+				var oMark = document.getElementsByClassName("mark")[0];
+				var oFloat = document.getElementsByClassName("float_layer")[0];
+				var oBig = document.getElementsByClassName("big_pic")[0];
+				var oImg = oBig.getElementsByTagName("img")[0];
+				//设置鼠标移入事件
+				oMark.onmouseover = function(){
+					oFloat.style.display = "block";
+					oBig.style.display = "block";
+				}
+				//设置鼠标移出事件
+				oMark.onmouseout = function(){
+					oFloat.style.display = "none";
+					oBig.style.display = "none";
+				}
+				//设置鼠标移动事件
+				oMark.onmousemove = function(evt){
+					var e = evt || window.event;
+					var l = e.clientX - oDiv.offsetLeft - oSmallPic.offsetLeft - oFloat.offsetWidth / 2;
+					var t = e.clientY - oDiv.offsetTop - oSmallPic.offsetTop - oFloat.offsetHeight /2 ;
+					
+					//设置边界
+					if(l < 0){
+						l = 0;
+					}else if(l > oMark.offsetWidth - oFloat.offsetWidth){
+						l = oMark.offsetWidth - oFloat.offsetWidth;
+					}
+					
+					if(t < 0){
+						t = 0;
+					}else if(t > oMark.offsetHeight - oFloat.offsetHeight){
+						t = oMark.offsetHeight - oFloat.offsetHeight;
+					}
+					
+					
+					oFloat.style.left = l + "px";
+					oFloat.style.top = t + "px";
+					
+					//滑块在小图上的滑动比例(当前left值 / 滑块在小图上的滑动范围)
+					var percentX = l / (oMark.offsetWidth - oFloat.offsetWidth);
+					var percentY = t / (oMark.offsetHeight - oFloat.offsetHeight);
+					
+					//滑动系数 * 大图在其所在Div中的移动范围
+					oImg.style.left = - percentX * (oImg.offsetWidth - oBig.offsetWidth) + "px";
+					oImg.style.top =  - percentY * (oImg.offsetHeight - oBig.offsetHeight) + "px";
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div id="box">
+			<div class="small_pic">
+				<span class="mark"></span>
+				<span class="float_layer"></span>		
+				<img src="img/small.jpg"/>
+			</div>
+			<div class="big_pic">
+				<img src="img/big.jpg"/>
+			</div>
+		</div>
+	</body>
+</html>

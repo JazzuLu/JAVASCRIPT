@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <!--网站编码格式，UTF-8 国际编码，GBK或 gb2312 中文编码-->
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="关键词一，关键词二">
+  <meta name="Description" content="网站描述内容">
+  <title>ajax案例一 load</title>
+  <!--css js 文件的引入-->
+ </head>
+ <body>
+
+	<input type="button" value="ajax 异步数据加载"  id="but"/>
+	<div id="Main"></div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	/* 第一步，加载外部数据*/
+//	$("#but").click(function(){
+//		$("#Main").load("a.txt");
+//	});
+	
+	
+	/* 第二步，对加载的数据，可以通过 class样式来筛选*/
+//	$("#but").click(function(){
+//		$("#Main").load("info.html .zzl");
+//	});
+	
+	
+	/*第三步，load 以 get发送数据　（默认发送方式是get）*/
+	$("#but").click(function(){
+		//当我们是以get方式发送数据时，那后台要以get来接受数据
+		$("#Main").load("info.php?name=zzl");
+	});
+
+	
+	/*第四步，他的第二个参数的用法（主要是用来传参）
+	$("#but").click(function(){
+		//当我们是以Post方式发送数据时，那后台要以Post来接受数据
+		$("#Main").load("info.php",{
+						name:"zzl"
+					});
+	});
+	*/
+
+	/*第五步，他的第三个参数，回调函数的用法（重点）  response参数
+
+	$("#but").click(function(){
+		$("#Main").load("info.php",{
+						name:"zzl"
+					},function(response,status,xhr){
+						//response 他就是我们返回来的数据，可对其进行据的操作
+						var arr=response.split(",");
+						var html=""
+						for(var i=0;i<arr.length;i++){
+						html+="<p style='color:red'>"+arr[i]+"</p>";
+						}
+						$("#Main").append(html);
+					});
+	});
+*/
+
+/*
+	第六步：回调函数的第二个参数 status 他的用法
+	$("#but").click(function(){
+		$("#Main").load("info.php",{
+						name:"zzl"
+					},function(response,status,xhr){
+						//status 当前获取数据的状态 success成功 error 失败
+						if(status=="success"){
+							alert("获取数据成功！！ ");
+							//当数据获取成功之后，我再对数据进行处理
+							var arr=response.split(",");
+							var html=""
+							for(var i=0;i<arr.length;i++){
+							html+="<p style='color:red'>"+arr[i]+"</p>";
+							}
+							$("#Main").append(html);
+						}
+						if(status=="error"){
+							alert("获取数据失败！！ ");
+						}
+					});
+	});
+*/
+
+
+/*第七步：回调函数的第三个参数 xhr (他本身就是一个 对象 obj)*/
+//$("#but").click(function(){
+//		$("#Main").load("info.php",{
+//						name:"zzl"
+//					},function(response,status,xhr){
+//						//xhr他是一个对象
+//						//xhr.responseText 就相当于response 
+//						//xhr.status 返回具体的状态 200 ok
+//						alert(xhr.statusText);
+//					});
+//	});
+
+
+
+</script>
+ </body>
+</html>

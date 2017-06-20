@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="getAttribute.js"></script>
+		<script>
+			window.onload  = function(){
+				//获取页面元素
+				var oUl = document.getElementsByTagName("ul")[0];
+				removeSpace2(oUl);
+				alert(oUl.childNodes.length);
+				//var subUl = oUl.childNodes; //获取所有的子节点
+				//subUl = deleteSpace(subUl);
+				//subUl = removeSpace(subUl);
+				/*
+				console.log(subUl.length);
+				console.log(oUl.nodeName);
+				console.log(oUl.nodeType);
+				console.log(oUl.nodeValue);
+				console.log(subUl[0].nodeName);
+				console.log(subUl[0].nodeType);
+				console.log(subUl[0].nodeValue);
+				*/
+				//常见的节点：
+				/*
+						         元素节点        属性节点  文本节点
+					nodeName     元素的名称       属性名     #text
+					nodeType        1               2          3
+					nodeValue    	null          属性值     文本内容（纯文本）
+					
+				*/
+				/*
+					/正则表达式/
+					^ \s   $
+					\s:表示空白符
+					+  ： 表示前面出现的空白符至少出现1次，多者不限
+				*/
+				//忽略空白文本节点
+				function deleteSpace(node){ //node形参：接收的是传递过来的子节点列表
+					var arr = [];
+					//遍历所有的子节点
+					for(var i = 0;i < node.length; i ++){
+						//找出空白文本节点
+						if(node[i].nodeType === 3 && /^\s+$/.test(node[i].nodeValue)){
+							continue; //跳过空白文本节点
+						}else{
+							arr.push(node[i]); //将非空白文本节点与元素节点放入一个新数组中
+						}
+					}
+					return arr; //返回数组
+				}
+				//删除空白文本节点
+				function removeSpace(node){ //node:接收子节点列表（数组）;
+					for(var i = 0;i < node.length; i ++){
+						//找出空白文本节点
+						if(node[i].nodeType === 3 && /^\s+$/.test(node[i].nodeValue)){
+							node[i].parentNode.removeChild(node[i]);
+						}
+					}
+					return node;
+				}
+				
+				//删除空白文本节点2
+				function removeSpace2(node){ //node:接收的是父节点
+					var childs = node.childNodes; //获取到指定父节点中所有的子节点
+					for(var i = 0; i < childs.length;i ++){
+						//找出空白文本节点
+						if(childs[i].nodeType === 3 && /^\s+$/.test(childs[i].nodeValue)){
+							node.removeChild(childs[i]);
+						}
+					}
+					return node;
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<ul>春树暮云
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</body>
+</html>
+

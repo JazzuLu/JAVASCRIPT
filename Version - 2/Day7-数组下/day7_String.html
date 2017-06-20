@@ -1,0 +1,70 @@
+<!doctype>
+	<html>
+	<head>
+	<meta charset="utf-8"/>
+	</head>
+	<body>
+	<script>
+		var str = "中华人民共和国中华人民共和国中华人民共和国";  //常量
+		var oStr = new String("hello world!"); //构造函数
+		//属性：length
+		//alert(str.length);
+		/*
+		//查找
+		for(var i = 0;i < str.length; i ++){
+			alert(str.charAt(i));
+			//alert(str[i]);
+		}
+		
+		alert(str.indexOf("人民共和国"));
+		alert(str.lastIndexOf("人民共和国"));
+		alert(str.charCodeAt(0)); //查找指定下标位置字符的编码
+		alert(String.fromCharCode(20013));  //返回编码所对应的字符
+		//思考：将输入的字符串加密
+		*/
+		
+		//截取
+		/*
+			substring(start,end)  
+			slice(start,end)
+			1.都是包含start，不包含end位置的字符
+			2.substring：参数大小不区分（不能为负数）
+			3.slice：参数不区分正负数，但必须由小到大。
+			substr(start,length) //从start开始截取，截取length个字符
+		
+		console.log(str.substring(-7,-2));
+		console.log(str.slice(-7,-2));
+		console.log(str.substr(2,7));*/
+		//转换
+		/*
+			split("分割符"，length) : 将字符串转换成数组
+			toUpperCase(); 将小写字母转为大写字母
+			toLowerCase(); 将大写字母转为小写字母
+		
+		str = "中华人民共和国中华人民共和国中华人民共和国";
+		var arr = str.split("");
+		alert(arr);
+		思考：将一个字符串逆序，至少使用两种方法。
+		var str = "How Do You Do";
+		var upper = str.toUpperCase();
+		alert(upper);
+		var lower = str.toLowerCase();
+		alert(lower);
+		*/
+		//替换
+		//replace(被替换的字符串，替换成的字符串)
+		/*
+		var str = "how do you do";
+		var myStr = str.replace("do","are");
+		alert(myStr);
+		思考：将一个字符串中所有的子串替换成另外一个子串。
+		*/
+		/*
+		for(var i = 19968; i <= 40869;i ++){
+			document.write(String.fromCharCode(i + " "));
+		}
+		*/
+		
+	</script>
+	</body>
+	</html>

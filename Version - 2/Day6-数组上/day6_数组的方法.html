@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Array</title>
+	</head>
+	<body>
+	
+	
+	
+	<script>
+	/*		增   删    改   截     拼     复     排    转
+	
+			方法		作用                  返回值			   是否会影响到原数组内容
+		增  前增unshift	数组前面添加内容	新增后数组的长度          是
+		    后增push    数组末尾增加元素    新增后数组的长度          是
+			
+		删  前删shift   删除数组首部的元素  被删除的元素 			  是
+			后删pop		删除数组尾部的元素  被删除的元素			  是
+			
+		改  splice(start,length,新增的元素)
+						在数组任意位置可以
+						增加、删除、修改数
+						组元素			    被删除的元素				是
+					
+		截  slice(start,end)
+						截取指定位置的元素
+						包含起始位置的元素
+						不包含结束位置的元素  被截取的元素				否	
+						
+		拼  concat()    将新元素拼接到指定数组的末尾(如果将一个数组拼接到指定数组的末尾时，会将该数组的每一个元素单独拼接后指定数组的末尾)
+											 拼接后的新数组				否
+											 
+		复  slice(0)
+			concat()
+			
+		排  reverse()   逆序数组			逆序后数组					是
+			sort()      按编码排序          排序后的数组   				是
+			扩展：
+			sort(function(a,b){return a - b;}) :如果是返回第一个参数减第二个参数，将数组中元素按从小到大排序（数字）；如果是返回第二个参数减第一个参数，将数组中元素按从大到小排序（数字）；
+		
+		转  toString()  将数组转为字符串    转换后的字符串    			否
+			join("指定分隔符") 将数组转为字符串  转换后的字符串         否
+			
+	*/
+	
+	/*
+	//unshift()
+	var arr = [1,2,3,4,5,6];
+	alert(arr.unshift(true,false,"null"));
+	alert(arr);
+	//push()
+	var arr = [1,2,3,4,5,6];
+	alert(arr.push(true,false,"null"));
+	alert(arr);
+	
+	var arr = [1,2,3,4,5,6];
+	alert(arr.push([7,8,9])); //如果将另一个数组添加到指定数组的前面或尾部，将这个数组以一个长度添加进去。
+	alert(arr);
+	alert(arr.length);
+	
+	//shift():思考：如何用该方法删除数组中所有元素
+	var arr = [9,1,2,3,4,5,6];
+	alert(arr.shift());
+	alert(arr);
+	
+	//pop()
+	var arr = [9,1,2,3,4,5,6];
+	alert(arr.pop());
+	alert(arr);
+	
+	//splice()
+	var arr = [9,1,2,3,4,5,6];
+	alert(arr.splice(1,0,true,false));
+	alert(arr);
+	
+	//slice()
+	var arr = [9,1,2,3,4,5,6];
+	alert(arr.slice(1,5));
+	alert(arr);
+	
+	//concat()
+	var arr = [9,1,2,3,4,5,6];
+	alert(arr.concat([1,2,3,4]).length);
+	alert(arr);
+	
+	复制
+	var arr = [9,1,2,3,4,5,6];
+	var list = arr.slice(0);
+	var arr_1 = arr.concat();
+	alert(arr);
+	alert(list);
+	alert(arr_1);
+	*/
+	
+	
+	/*
+	var a = 3;
+	var b = a;
+	a = 4;
+	alert("a=" + a + "\n" + "b=" + b);
+	*/
+	/*
+	var arr = [9,1,2,3,4,5,6];
+	var list = arr;
+	alert(arr);
+	alert(list);
+	arr[0] = "我";
+	alert(arr);
+	alert(list);
+	*/
+	/*
+	//reverse()
+	
+	var arr = [true,1,5,2,false,100];
+	alert(arr.reverse());
+	alert(arr);
+	
+	sort()
+	var arr = [true,1,5,2,false,100];
+	alert(arr.sort());
+	alert(arr);
+	
+	var arr = [98,40,100,89,79];
+	alert(arr.sort(function(a,b){ return b - a;}));
+	alert(arr);
+	
+	//toString();
+	var arr = [98,40,100,89,79];
+	alert(typeof arr.toString());
+	alert(typeof arr);
+	
+	//进制转换（扩展）
+	var num = 876;
+	alert(num.toString(8));
+	*/
+	var arr = [98,40,100,89,79];
+	console.log(arr.join(""));
+	console.log(arr);
+	</script>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>		
+		<style type="text/css">
+			.off{
+				background:orange;
+			}
+		</style>
+	</head>
+	<body>		
+		<h1>克隆</h1>
+		<p>我是一个P标签</p>		
+		<script type="text/javascript" src="js/jquery-1.11.3.js"></script>	
+		<script type="text/javascript">			
+			$(function(){				
+				$("h1").click(function(){
+					$(this).toggleClass("off");
+				});				
+				$("h1").clone(true).insertAfter($("p"));
+			});			
+		</script>			
+	</body>
+</html>

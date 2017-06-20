@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script>
+			var i = 0;
+			window.onscroll = function(){
+				//document.title = i ++;
+				//滚动高度
+				//var scrollTop = document.documentElement.scrollTop; //其它
+				//var scrollTop = document.body.scrollTop;  //谷歌
+				var scrollTop = document.documentElement.scrollTop ||document.body.scrollTop; //垂直滚动高度的兼容
+				//scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft; //横向滚动条的兼容
+				document.title = scrollTop;
+			}
+		</script>
+	</head>
+	<body style="height:5000px">
+		
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="getAttribute.js"></script>
+		<script src="removeSpace.js"></script>
+		<script>
+			//要求：点击a的时候，删除当前的li，将当前li中的数字存入一个数组，当所有的li都删除的时候，弹出数组中的元素
+			window.onload = function(){
+				var oA = document.getElementsByTagName("a"); //获取所有a元素
+				var oUl = document.getElementsByTagName("ul")[0];//获取ul元素
+				removeSpace(oUl); //删除ul中所有的空白文本子节点
+				var oLi = document.getElementsByTagName("li"); //获取所有li元素
+				//删除每一个li中所有的空白文本子节点
+				for(var i =0;i < oLi.length;i ++){
+					removeSpace(oLi[i]);
+				}
+				
+				var arrNum = [];
+				
+				//给每一个a元素添加点击事件
+				for(var i = 0;i < oA.length;i ++){
+					
+					oA[i].onclick = function(){
+						arrNum.push(this.previousSibling.nodeValue);
+						this.parentNode.parentNode.removeChild(this.parentNode);
+						if(!oUl.childNodes.length){
+							alert(arrNum);
+						}
+					};
+				}
+				
+			};
+			
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li>
+				1
+				<a href="javascript:;">删除</a>
+			</li>
+			<li>
+				2
+				<a href="javascript:;">删除</a>
+			</li>
+			<li>
+				3
+				<a href="javascript:;">删除</a>
+			</li>
+		</ul>
+	</body>
+</html>
+

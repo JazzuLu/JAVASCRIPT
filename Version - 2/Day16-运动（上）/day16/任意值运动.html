@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				border: 1px solid green;
+				font-size: 16px;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>我要变宽</div>
+		<div>我要变高</div>
+		<div>我要隐形</div>
+		<div>我要穿厚厚的衣服</div>
+		<div>我要变壮</div>
+	</body>
+</html>
+<script type="text/javascript" src="js/startMove5.1.js" ></script>
+<script type="text/javascript">
+	var oDiv = document.getElementsByTagName("div");
+	oDiv[0].onmouseenter = function(){
+		startMove(this,"width",500);
+	}
+	oDiv[0].onmouseleave = function(){
+		startMove(this,"width",100);
+	}
+	oDiv[1].onmouseenter = function(){
+		startMove(this,"height",500);
+	}
+	oDiv[1].onmouseleave = function(){
+		startMove(this,"height",100);
+	}
+	oDiv[2].onmouseenter = function(){
+		startMove(this,"opacity",30);
+	}
+	oDiv[2].onmouseleave = function(){
+		startMove(this,"opacity",100);
+	}
+	oDiv[3].onmouseenter = function(){
+		startMove(this,"borderWidth",30);
+	}
+	oDiv[3].onmouseleave = function(){
+		startMove(this,"borderWidth",1);
+	}
+	oDiv[4].onmouseenter = function(){
+		startMove(this,"fontSize",100);
+	}
+	oDiv[4].onmouseleave = function(){
+		startMove(this,"fontSize",16);
+	}
+</script>

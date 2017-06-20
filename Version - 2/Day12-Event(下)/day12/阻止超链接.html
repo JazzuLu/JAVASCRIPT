@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="http://www.baidu.com" id="a1">百度</a>
+	</body>
+</html>
+<script type="text/javascript">
+	//获取页面元素
+	var oA = document.getElementById("a1");
+	oA.onclick = function(evt){
+		evt = evt || window.event;
+		//evt.preventDefault();
+		//evt.returnValue = false;
+		//阻止超链接的兼容
+		evt.preventDefault ? evt.preventDefault() : evt.returnValue = false;
+	}
+</script>

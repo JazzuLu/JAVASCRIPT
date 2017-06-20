@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <title>JavaScript</title>
+		<style>
+			table{border-collapse:collapse;}
+			td{border:1px solid;}
+		</style>
+		<script>
+			window.onload = function(){
+				//document.cookie = "key=value;expires=date;path=/"
+				//value = "{id:2,proName:'电脑',price:4999,num:this.num}"
+				//"{id:"+ id + ",proName:' " + name + "',price: " + price + ",num:" + this.num + "}"
+				//key = "product_" + id
+				//获取所有的A标签
+				var oA = document.getElementsByTagName("a");
+				//设置有效期
+				var date = new Date();
+				date.setDate(date.getDate() + 7);
+				//循环给a加点击事件
+				for(var i = 0; i < oA.length; i ++){
+					oA[i].num = 0;  //给每一个A添加一个属性num.
+					oA[i].onclick = function(){
+						this.num ++;
+						var id = this.parentNode.parentNode.firstChild.firstChild.value;
+                        //input[0].value
+						var name = this.parentNode.parentNode.firstChild.lastChild.nodeValue;
+                        //first td's textnode 水杯
+						var price = this.parentNode.previousSibling.innerHTML;
+						//var cookieValue = {id:id,name:"name",price:price,num:this.num}
+						var cookieValue = "{id:" + id + ",name:'" + name + "',price:" + price + ",num:" + this.num + "}";
+						var cookieKey = "product_" + id;
+						document.cookie = cookieKey + "=" + cookieValue + ";expires=" + date + ";path=/";
+						//"product_1={id:1,name:"水杯",price:29,num:2}; product_2={id:2,name:"电脑",price:4999,num:1}"
+					}
+				}
+			};
+		</script>
+    </head>
+    <body>
+		<table>
+			<tr>
+				<td>商品名</td><td>价格</td><td>操作</td>
+			</tr>
+			<tr><td><input type="hidden" value="1">水杯</td><td>29</td><td><a class="buy" href="javascript:;">购买</a></td></tr>
+			<tr><td><input type="hidden" value="2">电脑</td><td>4999</td><td><a class="buy" href="javascript:;">购买</a></td></tr>
+			<tr><td><input type="hidden" value="3">手机</td><td>1999</td><td><a class="buy" href="javascript:;">购买</a></td></tr>
+		</table>
+		<button onclick="window.location='cart.html';">查看购物车</button>
+    </body>
+</html>

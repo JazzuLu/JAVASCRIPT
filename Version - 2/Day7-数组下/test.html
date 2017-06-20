@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>学生成绩管理系统</title>
+	</head>
+	<body>
+	
+	</body>
+</html>
+<script>
+	/*
+	有10个学生，求总成绩、平均成绩、最高成绩、最低成绩、并将成绩由高到低的顺序排列输出。
+	分析：
+		var n = parseInt(prompt("请输入班级人数："));
+		var arrScore = new Array(n);
+	1.输入成绩
+		function scoreSum(arr){
+		2.总成绩
+		}
+		
+	
+	3.平均成绩
+	
+	4.最高成绩
+	5.最低成绩
+	6.成绩排序
+	*/
+	var n = parseInt(prompt("请输入班级人数："));
+	var arrScore;
+	var i;
+	if(isNaN(n) || n <= 0){  //
+		alert("您输入的人数不合法！");
+	}else{
+		arrScore = new Array(n);
+	}
+	
+	inputScore();
+	alert("总成绩：" + scoreSum() + "\n平均成绩：" + scoreAve() + "\n最高成绩：" + scoreMax() + "\n最低成绩：" + scoreMin() + "\n成绩排序：" + scoreSort());
+	
+	//输入成绩
+	function inputScore(){
+		alert(arrScore.length);
+		for(i = 0;i < arrScore.length; i ++){
+			var fNum = Number(prompt("请输入第" + (i + 1) + "个学生的成绩："));
+			if(isNaN(fNum)){
+				alert("您输入的成绩不合法！");
+				break;
+			}else{
+				arrScore[i] = fNum;
+			}
+		}
+	}
+	//求总成绩
+	function scoreSum(){
+		var sum = 0;
+		for(i = 0;i < arrScore.length; i ++){
+			sum += arrScore[i];
+		}
+		return sum;
+	}
+	//求平均成绩
+	function scoreAve(){
+		return scoreSum() / n;
+	}
+	//求最高成绩
+	function scoreMax(){
+		var max = arrScore[0];
+		for(i = 1;i < arrScore.length; i ++){
+			if(arrScore[i] > max){
+				max = arrScore[i];
+			}
+		}
+		return max;
+	}
+	//求最低成绩
+	function scoreMin(){
+		var min = arrScore[0];
+		for(i = 1;i < arrScore.length; i ++){
+			if(arrScore[i] < min){
+				min = arrScore[i];
+			}
+		}
+		return min;
+	}
+	//排序
+	function scoreSort(){
+		return arrScore.sort(function(a,b){return b - a;});
+	}
+	function scoreSort_mao(){
+		for(i = 1; i < arrScore.length; i ++){
+			for(var j = 0; j < arrScore.length - i;j ++){
+				if(arrScore[j] < arrScore[j + 1]){
+					var t = arrScore[j];
+					arrScore[j] = arrScore[j + 1];
+					arrScore[j + 1] = t;
+				}
+			}
+		}
+		return arrScore;
+	}
+</script>

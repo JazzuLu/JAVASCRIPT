@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title> new document </title>
+  <meta charset = "utf-8" />
+  <meta name="author" content="" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+ </head>
+
+ <body>
+  <script>
+	function fn(){
+		alert(3 * "null");  //NaN:Not a Number
+	}
+
+	/*
+	alert(null == undefined);
+	alert(null == 0);
+	alert(null == false);
+	alert(null == "");
+	alert(null === undefined);
+	*/
+	//alert( "null" && 5 > 3);
+	//“”:空字符串在判断中代表假
+	//undefined :在判断中代表假
+	//null :在判断中代表假
+
+	//alert(3 ? 3 : 2);
+	//alert(typeof typeof 3);   "number"
+	/*
+	var iNum = 3;
+	var oNum = new Object(3);
+	alert(typeof iNum);
+	alert(typeof oNum);
+	*/
+	var now = new Date();
+	alert(now.getMonth());
+  </script>
+
+  <button onclick = "fn()">点我</button>
+ </body>
+</html>

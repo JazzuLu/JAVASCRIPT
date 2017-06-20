@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+				right: 0;
+			}
+		</style>
+		<script src="js/move3.js" ></script>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oDiv = document.getElementById("box");
+				window.onscroll = function(){
+					var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+					var target = (document.documentElement.clientHeight - oDiv.offsetHeight) / 2 + scrollTop;
+					//document.title = target;
+					startMove(oDiv,"top",Math.floor(target));
+				};
+			};
+		</script>
+	</head>
+	<body style="height: 5000px;">
+		<div id="box">
+			
+		</div>
+	</body>
+</html>

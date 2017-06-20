@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+        <title>JavaScript</title>
+		<style>
+			table{border-collapse:collapse;}
+			td{border:1px solid;}
+		</style>
+		<script>
+			window.onload = function(){
+				alert(document.cookie);
+				//"product_1={id:1,name:"水杯",price:29,num:2}; product_2={id:2,name:"电脑",price:4999,num:1}"
+				var arr = document.cookie.split('; ');
+				//['product_1={id:1,name:"水杯",price:29,num:2}','product_2={id:2,name:"电脑",price:4999,num:1}']
+				//var index = 1;
+				for(var i = 0;i<arr.length;i++){
+					//arr[i]为name=value的cookie
+					//以=号分割，val数组中第一个元素为cookie 名字 第二个元素为 cookie值
+					var val = arr[i].split('=');
+					//['product_1','{id:1,name:"水杯",price:29,num:2}']
+					//['product_2','{id:2,name:"电脑",price:4999,num:1}']
+					if(val[0].indexOf('product_') == 0){
+						//cookie名以product_开头，说明是添加到购物车中的商品信息
+						//还原商品的json对象
+						var product = eval('('+val[1]+')');  
+                        //{id:1,name:"水杯",price:29,num:2}
+						//在表格中插入行
+						var _tr = document.getElementById("tab").insertRow();  //插入行
+						//目标.insertRow() : 给指定的表格table的子节点末尾插入行
+						//目标.insertCell(): 给指定的行tr的子节点末尾插入单元格
+						var _td = _tr.insertCell(); //序号  插入单元格
+						_td.innerHTML = product.id;
+						_td = _tr.insertCell(); //商品名称
+						_td.innerHTML = product.name;
+						_td = _tr.insertCell();//单价
+						_td.innerHTML = product.price;
+						_td = _tr.insertCell();//数量
+						_td.innerHTML = product.num;
+					}
+				}
+			};
+		</script>
+    </head>
+    <body>
+		<table id="tab">
+			<tr><td>序号</td><td>商品名称</td><td>商品单价</td><td>数量</td></tr>
+		</table>
+    </body>
+</html>

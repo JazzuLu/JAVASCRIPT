@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#ul1{
+				width: 200px;
+				height: 28px;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+			#ul1 li{
+				width: 27px;
+				height: 28px;
+				float: left;
+				background: url(star.gif) no-repeat 0 0;
+				
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+				var oUl = document.getElementById("ul1");
+				var oLi = oUl.getElementsByTagName("li");
+				var oDiv = document.getElementById("box");
+				var arr = ["差评","一般","好","很好","非常好"];
+				var onOff = false;
+				var checkedIndex = -1;
+				//给每一个li添加事件
+				for(var i = 0;i < oLi.length; i ++){
+					oLi[i].index  = i; //记录下标
+					oLi[i].onmouseover = function(){
+						if(onOff){ //第一种情况：已经点过鼠标
+							if(this.index >= checkedIndex){
+								//先将所有的星星都变成灰色的
+								for(var j = 0;j < oLi.length; j ++){
+									oLi[j].style.background = "url(star.gif) no-repeat 0 0";
+								}
+								//再将鼠标移过的星星变成金色的
+								for(var k = 0;k <= this.index; k ++){
+									oLi[k].style.background = "url(star.gif) no-repeat 0 -28px";
+								}
+							}
+						}else{ //第二种情况：没有点过鼠标
+							//先将所有的星星都变成灰色的
+							for(var j = 0;j < oLi.length; j ++){
+								oLi[j].style.background = "url(star.gif) no-repeat 0 0";
+							}
+							//再将鼠标移过的星星变成金色的
+							for(var k = 0;k <= this.index; k ++){
+								oLi[k].style.background = "url(star.gif) no-repeat 0 -28px";
+							}
+						}
+					}
+					oLi[i].onclick = function(){
+						onOff = true; //切换开关
+						checkedIndex = this.index;  //记录点击时的当前下标
+						oDiv.innerHTML = arr[this.index];
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div id="box"></div>
+	</body>
+</html>

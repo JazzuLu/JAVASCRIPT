@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript">
+			//curl "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=bbb&cb=
+			//curl "https://suggest.taobao.com/sug?code=utf-8&q=aaa&callback=
+			window.onload = function(){
+				var oTxt = document.getElementById("txt");
+				var oBtn = document.getElementById("btn");
+				oTxt.onkeyup = function(){
+					var sc = document.createElement("script");
+					//sc.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" + oTxt.value + "&cb=fn";
+					sc.src = "https://suggest.taobao.com/sug?code=utf-8&q="+oTxt.value + "&callback=fn";
+					document.getElementsByTagName("head")[0].appendChild(sc);
+				}
+				
+			}
+			//全局函数
+			function fn(str){
+				//console.log(str.s);
+				var oUl = document.getElementById("ul1");
+				oUl.innerHTML = "";
+				for(var i = 0; i < str.result.length; i ++){
+					var li = document.createElement("li");
+					li.innerHTML = str.result[i];
+					oUl.appendChild(li);
+				}
+			}
+		</script>
+		
+	</head>
+	<body>
+		<input type="text" name="txt" id="txt" value="" />
+		<input type="button" name="btn" id="btn" value="搜索" />
+		<ul id="ul1">
+			
+		</ul>
+	</body>
+</html>

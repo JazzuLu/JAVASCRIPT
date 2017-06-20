@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				/*position: absolute;	*/
+				margin-top:10px;
+				border: 1px solid black;
+				opacity: 1;
+				filter: alpha(opacity=100);
+			}
+		</style>
+	</head>
+	<body>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</body>
+	<script type="text/javascript" src="js/move5.js" ></script>
+	<script type="text/javascript">
+		var oDiv = document.getElementsByTagName("div");
+		for(var i = 0; i < oDiv.length; i ++){
+			oDiv[i].onmouseenter = function(){
+				
+				startMove(this,"opacity",30);
+			};
+			oDiv[i].onmouseleave = function(){
+				startMove(this,"opacity",100);
+			};
+		}
+	</script>
+</html>

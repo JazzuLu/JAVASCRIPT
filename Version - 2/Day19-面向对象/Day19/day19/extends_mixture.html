@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//第三种继承：混合继承
+	function Person(name,age){
+		this.name = name;
+		this.age = age;
+	}
+	//原型方法
+	Person.prototype.eat = function(){
+		return "吃";
+	}
+	
+	function Man(name,age){
+		Person.call(this,name,age); //冒充继承，继承实例
+	}
+	//原型继承，继承原型方法
+	for(var i in Person.prototype){
+		Man.prototype[i] = Person.prototype[i];
+	}
+	var man = new Man("张三",18,"男");
+	alert(man.name);
+	alert(man.eat());
+</script>

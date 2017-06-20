@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//2 ^ 2 ! + 3 ^ 2 !
+	
+	function ping (n){
+		return fac(n * n);
+	}
+	function fac(n){
+		if(n == 1){
+			return 1;
+		}else{
+			return n * fac(n - 1);
+		}
+	}
+	alert(ping(2) + ping(3));
+</script>

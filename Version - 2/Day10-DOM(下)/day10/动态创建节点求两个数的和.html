@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script>
+			window.onload  = function(){
+				var oBody = document.getElementsByTagName("body")[0]; //获取body元素
+				//创建p节点
+				var oP = document.createElement("p");
+				var oTxt = document.createTextNode("请输入一个整数");  //创建文本节点
+				var oInp = document.createElement("input"); //创建input元素
+				oInp.type = "text";  //设置input的type属性，值为text
+				oInp.id = "txt1";  //设置input的id属性，值为txt1
+				
+				//将oTxt先放到p中
+				oP.appendChild(oTxt);
+				//将input放到p中
+				oP.appendChild(oInp);
+				oBody.appendChild(oP);
+				
+				oP = document.createElement("p");
+				oTxt = document.createTextNode("请输入一个整数");
+				oInp = document.createElement("input");
+				oInp.type = "text";
+				oInp.id = "txt2";
+				oP.appendChild(oTxt);
+				oP.appendChild(oInp);
+				oBody.appendChild(oP);
+				
+				oP = document.createElement("p");
+				oInp = document.createElement("input");
+				oInp.type = "button";
+				oInp.value = "提交";
+				oInp.id = "btn";
+				oP.appendChild(oInp);
+				oInp = document.createElement("input");
+				oInp.type = "button";
+				oInp.value = "清空";
+				oInp.id = "cls";
+				oP.appendChild(oInp);
+				oBody.appendChild(oP);
+				
+				oP = document.createElement("p");
+				oTxt = document.createTextNode("结果为:");
+				var oDiv = document.createElement("div");
+				oDiv.id = "box";
+				oDiv.style.width = "100px";
+				oDiv.style.height = "30px";
+				oDiv.style.border = "1px solid black";
+				oP.appendChild(oTxt);
+				oP.appendChild(oDiv);
+				oBody.appendChild(oP);
+				
+				
+				var oInput = document.getElementsByTagName("input");
+				var oBox = document.getElementById("box");
+				oInput[2].onclick = function(){
+					var iNum = parseInt(oInput[0].value);
+					var iNum_02 = parseInt(oInput[1].value);
+					oBox.innerHTML = iNum + iNum_02;
+				};
+				oInput[3].onclick = function(){
+					oInput[0].value = oInput[1].value = oBox.innerHTML = "";
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<!--
+		思考
+		<p>请输入一个整数<input type="text" id="txt1"></p>
+		<p>请输入一个整数<input type="text" id="txt2"></p>
+		<p><input type="button" value = "提交" id="btn"><input type="button" value="清空" id="cls"></p>
+		<p>结果为：<div id="box" style="width:100px;height:30px;border:1px solid black;"></div></p>
+		-->
+	</body>
+</html>
+

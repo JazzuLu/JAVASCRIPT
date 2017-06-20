@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证2</title>
+	<style type="text/css">
+		*{margin:0;padding:0;}
+		html,body{height:100%;}
+		#box{width:600px;min-height:300px;background:#03ccbb;margin:150px auto;padding:40px;border:3px solid #f90;}
+		h1{width:600px;height:30px;line-height:30px;font-size:24px;color:#ff0;padding-bottom:50px;}
+		p{width:600px;height:30px;line-height:30px;font-size:20px;color:#666;}
+		input{width:200px;height:20px;}
+		#btn input{width:50px;height:40px;color:#fff;font-weight:600;background:#666;float:right;}
+		span{display:inline-block;width:200PX;height:30px;margin-left:20px;background:#e0e0e0;border:2px solid #f90;font-size:12px;border-radius:50%;padding:5px;display:none;float:right;text-align:center;}
+		#btn span{float:left;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oInput = document.getElementsByTagName('input');
+			var oSpan = document.getElementsByTagName('span');
+			oInput[0].onblur = function(){
+				var re = /^[\u4e00-\u9fa5]{6,12}$/g;
+				if(re.test(oInput[0].value) == false || oInput[0].value == ""){
+					oSpan[0].style.display = "block";
+				}else{
+					oSpan[0].style.display = "none";
+				}
+			};
+			oInput[1].onblur = function(){
+				var re = /^[1-9][0-9]{16}[0-9Xx]$/g;
+				if(re.test(oInput[1].value) == false || oInput[1].value == ""){
+					oSpan[1].style.display = "block";
+				}else{
+					oSpan[1].style.display = "none";
+				}
+			};
+			oInput[2].onblur = function(){
+				var re = /^(13|14|15|17|18)\d{9}$/g;
+				//var re = /^([13\d]|[14\d]|[15\d]|[17\d]|[18\d])([\d]{8})$/g;
+				if(re.test(oInput[2].value) == false || oInput[2].value == ""){
+					oSpan[2].style.display = "block";
+				}else{
+					oSpan[2].style.display = "none";
+				}
+			};
+			oInput[3].onblur = function(){
+				var re = /^([\w\.-]+)@([\w\.-]+)\.([a-z]{3,5})$/g;
+				if(re.test(oInput[3].value) == false || oInput[3].value == ""){
+					oSpan[3].style.display = "block";
+				}else{
+					oSpan[3].style.display = "none";
+				}
+			};
+			oInput[4].onblur = function(){
+				var re = /^([0-9])([\w\.\+\*\$\/\\]{5})$/g;
+				if(re.test(oInput[4].value) == false || oInput[4].value == ""){
+					oSpan[4].style.display = "block";
+				}else{
+					oSpan[4].style.display = "none";
+				}
+			};
+			oInput[5].onclick = function(){
+				for(var i = 0;i < oInput.length-2;i ++){
+					if(oInput[i].value == "" ||(oSpan[i].style.display == "block")){
+						oSpan[5].style.display = "block";
+						return;
+					}else{
+						alert('提交成功');
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id = "box">
+		<h1>表单验证</h1>
+		<p>请输入用户名：<input type = "text"/><span>请输入正确的用户名</span><p>
+		<p>请输入身份证：<input type = "text"/><span>请输入正确的身份证号</span><p>
+		<p>请输入手机号：<input type = "text"/><span>请输入正确的手机号</span><p>
+		<p>请输入邮箱: &nbsp;<input type = "text"/><span>请输入正确的邮箱</span><p>
+		<p>请输入密码: &nbsp;<input type = "text"/><span>您的密码用户名不匹配</span><p>
+		<p id = "btn"><input type = "button" value = "提交"/><span>请将信息补充完整</span></p>
+	</div>
+</body>
+</html>

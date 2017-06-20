@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="getAttribute.js"></script>
+		<script>
+			window.onload  = function(){
+				//获取div对象
+				var oDiv = document.getElementById("box");
+				console.log(oDiv.id);
+				console.log(oDiv.title);
+				console.log(oDiv.className);  //因为class是保留字
+				console.log(oDiv.style.width);
+				console.log(oDiv.style.height);
+				console.log(oDiv.style.backgroundColor);
+				console.log(oDiv.getAttribute("name"));
+				console.log(oDiv.getAttribute("me"));
+				//console.log(oDiv.getAttribute("className"));
+				if(oDiv.getAttribute("class") == null){
+					console.log(oDiv.getAttribute("className"));
+				}else{
+					console.log(oDiv.getAttribute("class"));
+				}
+				
+				
+				var attr = getAttribute(oDiv);
+				//alert(attr);
+				var oP = document.getElementsByTagName("p")[0];
+				//alert(getAttribute(oP));
+				
+				
+				oDiv.id="idid";
+				//alert(oDiv.id);
+				//oDiv.me = "it";
+				oDiv.setAttribute("me","it");
+				oDiv.removeAttribute("me");
+				//alert(oDiv.getAttribute("me"));
+				//alert(oDiv.outerHTML);
+				//alert(oDiv.innerHTML);
+				//alert(oDiv.innerText);
+				//oP.innerHTML = "我爱你-<i>中国</i>";
+				oP.innerText = "我爱你-<i>中国</i>";
+			};
+		</script>
+	</head>
+	<body>
+		<div id="box" title="标题" class="pox" style="width:100px;height:100px;background:red;" name="div" me="you" aa="bb">测试<strong>Div</strong></div>
+		<p pp="dd" class="pd"></p>
+	</body>
+</html>
+

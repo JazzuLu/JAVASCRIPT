@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	function Person(name,age){
+		//实例属性
+		this.name = name;
+		this.age = age;
+		//实例方法
+		this.eat = function(){
+			return "吃";
+		}
+		this.drink = function(){
+			return "喝";
+		}
+	}
+	//第一种继承：call()和apply():伪装继承（冒充继承）(经典继承)  只能继承实例属性和实例方法
+	//
+	function Man(name,age,sex){
+		Person.call(this,name,age); //继承
+		//Person.apply(this,[name,age]);
+		this.sex = sex;
+	}
+	
+	var man = new Man("张三",18,"男");
+	alert(man.name);
+	alert(man.eat());
+	alert(man.sex);
+</script>

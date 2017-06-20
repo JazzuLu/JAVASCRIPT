@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			#box{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;  /*运动：必须让元素脱离文档流*/
+				left: 0px;
+			}
+			#span1{
+				width: 1px;
+				height: 300px;
+				background: black;
+				position: absolute;
+				top: 0;
+				left: 500px;
+			}
+		</style>
+		<script type="text/javascript">
+			//页面加载
+			window.onload = function(){
+				//获取页面元素
+				var oDiv = document.getElementById("box");
+				var oBtn = document.getElementById("btn");
+				var timer = null;
+				oBtn.onclick = function(){
+					startMove(oDiv,500)
+				};
+				
+				/*
+				 * 匀速运动的简单框架
+				 * 1.无法停止          设置停止条件
+				 * 2.停止后，再点击，又飞了，而且无法停止        >=目标值
+				 * 3.停止后，再点击，元素跳动                运动语句放在else中
+				 * 4.连续点击，速度加快              先清除上一次的计时器，再开启新的计时器
+				 */
+				
+				function startMove(obj,target){
+					//设置计时器
+					clearInterval(timer);
+					timer = setInterval(function(){
+						//计算速度
+						var speed = target > obj.offsetLeft ? 7 : -7;
+						//检测停止
+						if(Math.abs(target - obj.offsetLeft) < 7){
+							obj.style.left = target + "px";
+							clearInterval(timer);
+						}else{
+							obj.style.left = obj.offsetLeft + speed-- + "px";
+							//oDiv.style.top = oDiv.offsetTop + 10 + "px";
+						}
+						
+					},30)
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<input type="button" name="btn" id="btn" value="开始运动" />
+		<div id="box">
+			
+		</div>
+		<span id="span1">
+			
+		</span>
+	</body>
+</html>

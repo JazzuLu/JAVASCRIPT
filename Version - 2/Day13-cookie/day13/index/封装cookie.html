@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	var date = new Date();
+	date.setDate(date.getDate() + 5);
+	//alert(date);
+	/*
+	document.cookie = "姓名=张三;expires=" + date + ";path=/";
+	document.cookie = "url=www.1000phone.com;expires=" + date + ";path=/";
+	document.cookie = "email=zhangsan@1000phone.com;expires=" + date + ";path=/";
+	alert(document.cookie);
+	*/
+	//封装一个创建cookie的方法
+	function createCookie(key,value,expires,domain,secure){
+		var cookieText = encodeURIComponent(key) + "=" + encodeURIComponent(value) + ";path=/";
+		if(!isNaN(expires)){
+			if(typeof expires == "number" && expires > 0){
+				var date = new Date();
+				date.setDate(date.getDate() + expires);
+				cookieText += ";expires=" + date;
+			}
+		}
+		if(domain){
+			cookieText += ";domain=" + domain;
+		}
+		if(secure){
+			cookieText += ";secure";
+		}
+		document.cookie = cookieText;
+	}
+	createCookie("姓名","张三",10);
+	createCookie("url","www.1000phone.com",10);
+	createCookie("email","zhangsan@1000phone.com",10);
+	//alert(document.cookie);
+	//封装一个获取cookie的方法
+	//方法一：
+	//%E5%A7%93%E5%90%8D=%E5%BC%A0%E4%B8%89; url=www.1000phone.com; email=zhangsan%401000phone.com
+	/*
+	 * 姓名=    0   张三
+	 * url=    39 www.1000phone.com
+	 * email zhangsan@1000phone.com
+	 * 
+	 * substring(start,end)
+	 * slice(start,end)
+	 * substr(start,length)
+	 */
+	//alert(getCookieValue("email"));
+	function getCookie(key){
+		var keyText = encodeURIComponent(key) + "="
+		var start = document.cookie.indexOf(keyText); //找到开始位置
+		if(start != -1){
+			var end = document.cookie.indexOf(";",start); //找到结束位置
+			if(end == -1){
+				end = document.cookie.length;
+			}
+			var cookieValue = decodeURIComponent(document.cookie.substring(start + keyText.length,end));
+		}
+		return cookieValue;
+	}
+	
+	//方法二
+	function getCookieValue(key){
+		var arr = document.cookie.split("; ");
+		//["%E5%A7%93%E5%90%8D=%E5%BC%A0%E4%B8%89","url=www.1000phone.com","email=zhangsan%401000phone.com"]
+		for(var i = 0; i < arr.length; i ++){
+			var list = arr[i].split("=");
+			//["%E5%A7%93%E5%90%8D","%E5%BC%A0%E4%B8%89"]
+			//["url","www.1000phone.com"]
+			//["email","zhangsan%401000phone.com"]
+			if(list[0] == encodeURIComponent(key)){
+				break;
+				return decodeURIComponent(list[1]);
+				
+			}
+		}
+	}
+	//封装一个删除cookie的方法
+	function removeCookie(key){
+		document.cookie = key + "=;expires=" + new Date(0) + ";path=/";
+	}
+	removeCookie("url");
+	alert(getCookieValue("url"));
+</script>

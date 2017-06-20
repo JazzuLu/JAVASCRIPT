@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+	//创建cookie
+	
+	//expires=日期对象，设置有效期
+	var date = new Date();
+	date.setDate(date.getDate() + 3);
+	//alert(date);
+	//encodeURIComponent():将计算机不能识别的字符进行编码
+	//document.cookie = encodeURIComponent("姓名") + "=" + encodeURIComponent("张志林") + ";expires=" + date + ";path=/" + ";secure";  //添加有效期,添加路径
+	//document.cookie = "url=1000phone.com";
+	//decodeURIComponent（）：解码
+	//alert(decodeURIComponent(document.cookie));
+	//当cookie设置有效期后，假如你将系统时间修改到过期时间后，cookie会进行假死状态，如果你将系统时间恢复，那么 cookie也将恢复。但是，如果有效期是正常过期，那么cookie将永久销毁。
+	//设置路径path=/
+	//设置域名domain=域名
+	//document.cookie = "email=zhangzhilin@1000phone.com;secure";
+	
+	
+	//创建cookie的完整格式
+	//document.cookie = "key=value[;expires=日期对象][;path=路径][;domain=域名][;secure]";
+</script>

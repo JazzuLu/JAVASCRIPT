@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text"  />
+		<input type="button"  value="点击"/>
+		<div id="box">
+			
+		</div>
+	</body>
+	<script>
+		var oInp = document.getElementsByTagName("input");
+		var oDiv = document.getElementById("box");
+		var str = " abcdefghijklmnopqrstuvwxyz";
+		
+		oInp[1].onclick = function(){
+			var sum = 0;
+			var newStr = ""
+			/*
+			for(var i = 0; i < oInp[0].value.length; i ++){
+				arr[i] = str.charAt(oInp[0].value[i]);
+			}
+			console.log(arr);
+			*/
+			
+			oDiv.innerHTML = "";
+			var oTxt = oInp[0].value.toLowerCase();
+			oInp[0].value = "";
+			oInp[0].value = "";
+			for(var i = 0;i < oTxt.length; i ++){
+				for(var j = 0;j < str.length; j ++){
+					if(oTxt.charAt(i) == str.charAt(j)){
+						sum += j;
+						newStr += "+" + j;
+					}
+				}
+			}
+			
+			oDiv.innerHTML = newStr.substr(1) + " = " + sum;
+			
+		}		
+	</script>
+</html>
